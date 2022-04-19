@@ -107,7 +107,7 @@ As we sustain the “no spoiler” sharing feature of the puzzle and add new fea
 
 **Technical Dependencies (Stack):**
 
-Frontend:
+**Frontend:**
 
 - React-Bootstrap & Bootstrap (for styling and designing the UI)
 - Next.js (React/backend framework)
@@ -154,9 +154,9 @@ In addition to the above Frontend and Backend dependencies, we will need a syste
 
   - If time allows, we can add functionality to adjust the color palette of the app to be more accessible to colorblind users (this functionality is already implemented in the original Wordle, so we can use this existing model to inform our approach to developing high-contrast color functionality)
 
-### Section 3: System Features and Requirements
+## Section 3: System Features and Requirements
 
-#### 3.1 Risks
+### 3.1 Risks
 
 The Wordify app will use a system for verifying that a user-inputted word is correct. For example, a user could input the word ”ADIEU”, and the system would return that it is a valid word, but the user could also input “GHFJK” and the system should return that it is not a valid word. This word verification process will require either storing all valid words in the code in order to make the process of validating words as fast as possible. However, there may be some five-letter words from other languages or dialects that are not considered “valid”, which would be unfair to users from other countries or regions with different languages/keyboards. Similarly, the correct word may be used in some regions more than others -- for example, if the correct word is “COLOR”, users who live in regions where the “colour” spelling is more common would be put at a disadvantage.
 

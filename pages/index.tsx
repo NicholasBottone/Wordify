@@ -1,10 +1,13 @@
 import type { NextPage } from "next";
+import Link from "next/link";
+import { Container } from "react-bootstrap";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <Container>
       <h1>Hello, world!</h1>
-    </div>
+      <Link href="/about">About</Link>
+    </Container>
   );
 };
 

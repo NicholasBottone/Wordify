@@ -2,6 +2,10 @@
 
 This guide details some of the design patterns and overall philosophies that should be followed while working on the Wordify project repository.
 
+## IDE & Plugins
+
+We use [Visual Studio Code](https://code.visualstudio.com/) with the following extensions: [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode).
+
 ## Git
 
 The `main` branch is the production branch. Changes to the `main` branch are automatically deployed to the production website. Code should not be directly pushed to the `main` branch without first using a pull request and receiving an approving review from another contributor. Pull requests should be created and merged frequently to avoid any merge conflicts.

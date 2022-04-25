@@ -1,6 +1,6 @@
 # Wordify
 
-A social word game web app, built on Next.js
+A social word game web app! Built on Next.js, React, Mongoose, React-Bootstrap, React Icons, date-fns, use-debounce, react-spring, node-cron, Jest, and Next-Auth!
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

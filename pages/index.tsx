@@ -1,24 +1,22 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { Container } from "react-bootstrap";
+import {Container, Image} from "react-bootstrap";
+import React from "react";
 
 const Home: NextPage = () => {
   return (
     <Container>
-      <h1>Hello, world!</h1>
-      <Link href="/about">About</Link>
-      <h1 class="text-centered">
-        ⬜⬜⬜⬜⬜ <br></br>
-        ⬜⬜⬜⬜⬜ <br></br>
-        ⬜⬜⬜⬜⬜ <br></br>
-        ⬜⬜⬜⬜⬜ <br></br>
-        ⬜⬜⬜⬜⬜ <br></br>
-      </h1>
-      <h2 class="text-centered">
-        Q W E R T Y U I O P <br></br>
-        A S D F G H J K L <br></br>
-        Z X C V B N M <br></br>
-      </h2>
+      <Image
+          src="/blueno.png"
+          alt="Blueno logo"
+          width="300"
+          height="300"
+          className="d-inline-block align-top"
+      />
+      <h1>Wordify</h1>
+        <a href="/game" className="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Play As Guest</a>
+        <br></br>
+        <a href="/#" className="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Log In</a>
     </Container>
   );
 };

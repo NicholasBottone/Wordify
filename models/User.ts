@@ -2,6 +2,10 @@ import { model, Schema } from "mongoose";
 import IUser from "../types/IUser";
 
 const UserSchema = new Schema({
+  googleId: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

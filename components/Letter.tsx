@@ -1,5 +1,10 @@
 import React from "react";
 
-export default function Letter({ rowIndex, letterIndex }) {
+interface Props {
+  rowIndex: number;
+  letterIndex: number;
+}
+
+export default function Letter({ rowIndex, letterIndex }: Props) {
   return <div className="letter">A</div>;
 }

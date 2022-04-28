@@ -1,14 +1,11 @@
-import React, { Component } from 'react'
+import React from "react";
 
-export default class LetterTile extends Component {
-  render() {
-    return (
-      <div>
-        <input type="text">
-
-      </input>
-      </div>
-      
-    )
-  }
+function LetterTile() {
+  return (
+    <div>
+      <input type="text"></input>
+    </div>
+  );
 }
+
+export default LetterTile;

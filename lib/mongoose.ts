@@ -11,6 +11,11 @@ export default async (
     return next();
   }
   // connect to mongo
-  await mongoose.connect(process.env.MONGODB_URL!);
+  try {
+    await mongoose.connect(process.env.MONGODB_URL!);
+    console.log("connected to MongoDB!");
+  } catch (e) {
+    console.error(e);
+  }
   return next();
 };

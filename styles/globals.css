@@ -1,0 +1,20 @@
+table, th, td {
+    text-align: center
+}
+table {
+    min-width: 650px;
+}
+
+body {
+    /*background: #C8B4CF;*/
+    background: #EDE6ED;
+}
+
+.button {
+    background-color: #A577A3;
+}
+
+th {
+    font-size: x-large;
+    color: #02C39A;
+}

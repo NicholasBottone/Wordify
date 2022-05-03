@@ -3,7 +3,6 @@ import { boardDefault } from "../components/words";
 import Letter from "./Letter";
 
 export default function Board() {
-  const [board, setBoard] = React.useState(boardDefault);
   return (
     <div className="board">
       {" "}

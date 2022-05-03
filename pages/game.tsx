@@ -3,7 +3,7 @@ import Keyboard from "../components/Keyboard";
 import { createContext, useState } from "react";
 import { boardDefault } from "../components/words";
 
-export const GameContext = createContext();
+export const GameContext = createContext(null);
 
 function game() {
   const [board, setBoard] = useState(boardDefault);

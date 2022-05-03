@@ -54,7 +54,6 @@ export default function Keyboard() {
         })}
         <Key value="DELETE" />
       </div>
-      Keyboard
     </div>
   );
 }

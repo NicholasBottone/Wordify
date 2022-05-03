@@ -1,5 +1,4 @@
 import React from "react";
-import { boardDefault } from "../components/words";
 import Letter from "./Letter";
 
 export default function Board() {

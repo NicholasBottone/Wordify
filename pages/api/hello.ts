@@ -2,7 +2,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import User from "../../models/User";
 import nc from "next-connect";
-import mongoose from "../../lib/mongoose";
+import mongoose from "../../lib/middlewares/mongoose";
 
 const handler = nc<NextApiRequest, NextApiResponse>();
 

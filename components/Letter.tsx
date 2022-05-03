@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GameContext } from "../pages/game";
 
-export default function Letter({ rowIndex, letterIndex }) {
-  return <div className="letter">A</div>;
+interface Props {
+  rowIndex: number;
+  letterIndex: number;
+}
+
+export default function Letter({ rowIndex, letterIndex }: Props) {
+  const { board } = useContext(GameContext);
+  const letter = board[rowIndex][letterIndex];
+  return <div className="letter">{letter}</div>;
 }

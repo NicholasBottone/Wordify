@@ -1,23 +1,29 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import User from "../../../models/User";
+import { Request, Response } from "../../../lib/endpoints/express";
 import nc from "next-connect";
 import mongoose from "../../../lib/middlewares/mongoose";
 import auth from "../../../lib/middlewares/auth";
-import IUser from "../../../types/IUser";
 
-const handler = nc<NextApiRequest, NextApiResponse>();
+const handler = nc<Request, Response>();
 
 handler.use(mongoose, ...auth);
 
 handler.get(async (req, res) => {
   // get the user from the session
-  // @ts-ignore
-  const user = req.user as IUser | undefined;
+  const user = req.user;
 
   if (!user) {
-    return res.status(401).send("Not logged in");
+    // the user is not logged in
+    return res.status(401).json({
+      message: "you are not logged in",
+      success: false,
+    });
   } else {
-    res.status(200).send(user);
+    // the user is logged in, return the user object
+    res.status(200).json({
+      message: "you are logged in",
+      success: true,
+      user: user,
+    });
   }
 });
 

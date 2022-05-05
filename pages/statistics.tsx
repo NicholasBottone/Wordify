@@ -21,7 +21,7 @@ return (
           </Link>
         </Container>
         <Container className="mt-5 d-grid gap-2">
-          <h1>Statistics</h1>
+          <h1>Statistics 3</h1>
           <table className="Statistics">
             <thead>
               <tr>
@@ -43,13 +43,12 @@ return (
         </Container>
         <Container className="mt-5 d-grid gap-2">
           <h1> Guess Distribution </h1>
-          <div>1</div>
-          <ProgressBar now={100 / 4} label={`1`} variant="success"/>
-          2<ProgressBar now={100 / 2} label={`0`} variant="secondary" />
-          3<ProgressBar now={100 / 4} label={`1`} variant="secondary" />
-          4<ProgressBar now={100 / 1} label={`4`} variant="secondary" />
-          5<ProgressBar now={100 / 4} label={`1`} variant="secondary" />
-          0<ProgressBar now={100 / 4} label={`1`} variant="secondary" />
+          <ProgressBar now={100 / 4} label={`1`} variant="success" />
+          <ProgressBar now={0} label={`0`} variant="secondary" />
+          <ProgressBar now={100 / 4} label={`1`} variant="secondary" />
+          <ProgressBar now={100 / 1} label={`4`} variant="secondary" />
+          <ProgressBar now={100 / 4} label={`1`} variant="secondary" />
+          <ProgressBar now={100 / 4} label={`1`} variant="secondary" />
         </Container>
     </div>
   </div>

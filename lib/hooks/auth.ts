@@ -6,7 +6,11 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
 /**
  * Gets the user that is currently logged in.
  */
-export const useUser = useSWR<IUser>("/api/auth", fetcher);
+export const useUser = () => {
+  const { data, error } = useSWR<IUser>("/api/auth", fetcher);
+
+  return { user: data, error, isLoading: !data && !error };
+};
 
 /**
  * Redirects the user to the login page.

@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { Request, Response } from "../endpoints/express";
 
-export default async (
-  _req: NextApiRequest,
-  _res: NextApiResponse,
-  next: () => void
-) => {
+export default async (_req: Request, _res: Response, next: () => void) => {
   if (mongoose.connections[0].readyState) {
     // already connected
     return next();

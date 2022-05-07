@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import IUser from "../../types/IUser";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -24,4 +24,5 @@ export function login() {
  */
 export async function logout() {
   await fetch("/api/auth/logout");
+  mutate("/api/auth", null);
 }

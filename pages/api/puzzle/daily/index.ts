@@ -1,11 +1,11 @@
-import { Request, Response } from "../../../lib/endpoints/express";
+import { Request, Response } from "../../../../lib/endpoints/express";
 import nc from "next-connect";
-import mongoose from "../../../lib/middlewares/mongoose";
-import auth from "../../../lib/middlewares/auth";
-import { isLoggedIn } from "../../../lib/middlewares/user";
-import DailyPuzzle from "../../../models/DailyPuzzle";
-import IUser from "../../../types/IUser";
-import User from "../../../models/User";
+import mongoose from "../../../../lib/middlewares/mongoose";
+import auth from "../../../../lib/middlewares/auth";
+import { isLoggedIn } from "../../../../lib/middlewares/user";
+import DailyPuzzle from "../../../../models/DailyPuzzle";
+import IUser from "../../../../types/IUser";
+import User from "../../../../models/User";
 
 const handler = nc<Request, Response>();
 

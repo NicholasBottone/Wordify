@@ -1,7 +1,7 @@
-import { Request, Response } from "../../../lib/endpoints/express";
+import { Request, Response } from "../../../../lib/endpoints/express";
 import nc from "next-connect";
-import mongoose from "../../../lib/middlewares/mongoose";
-import DailyPuzzle from "../../../models/DailyPuzzle";
+import mongoose from "../../../../lib/middlewares/mongoose";
+import DailyPuzzle from "../../../../models/DailyPuzzle";
 
 const handler = nc<Request, Response>();
 

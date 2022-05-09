@@ -10,12 +10,12 @@ handler.use(mongoose);
 
 handler.post(async (req, res) => {
   // Check for the secret API key
-  if (req.headers["x-api-key"] !== process.env.API_KEY) {
+  if (req.headers["x-api-key"] !== process.env.CRON_API_KEY) {
     return res.status(401).send("Invalid API key");
   }
 
   // Increment daysAgo on all daily puzzles
-  DailyPuzzle.updateMany(
+  await DailyPuzzle.updateMany(
     {},
     {
       $inc: {
@@ -25,7 +25,7 @@ handler.post(async (req, res) => {
   );
 
   // Insert null at index 0 into pastGuesses and pastTimes for all users
-  User.updateMany(
+  await User.updateMany(
     {},
     {
       $push: {
@@ -43,3 +43,5 @@ handler.post(async (req, res) => {
 
   res.status(200).send("OK");
 });
+
+export default handler;

@@ -20,7 +20,7 @@ passport.deserializeUser((id, done) => {
 });
 
 const callbackURL = process.env.VERCEL
-  ? `https://${process.env.VERCEL_URL}/api/auth/callback`
+  ? `https://wordifygame.vercel.app/api/auth/callback`
   : "http://localhost:3000/api/auth/callback";
 
 // Google OAuth Strategy

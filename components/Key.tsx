@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { FaBackspace } from "react-icons/fa";
 import { GameContext } from "../pages/game";
 
 interface Props {
@@ -11,6 +12,9 @@ export default function Key({ value, disabled }: Props) {
   let className = "key";
   if (value === "ENTER") {
     className += " enter";
+  }
+  if (value === "DELETE") {
+    className += " delete";
   }
 
   const enterLetter = () => {
@@ -28,7 +32,7 @@ export default function Key({ value, disabled }: Props) {
       id={disabled ? "disabledKey" : "defaultKey"}
       onClick={enterLetter}
     >
-      {value}
+      {value === "DELETE" ? <FaBackspace /> : value}
     </div>
   );
 }

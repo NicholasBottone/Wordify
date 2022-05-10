@@ -133,6 +133,11 @@ nav h1 {
   font-size: 18px;
 }
 
+.delete {
+  width: 50px;
+  font-size: 30px;
+}
+
 #correct {
   background-color: #528d4e;
 }

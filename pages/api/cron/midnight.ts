@@ -8,6 +8,11 @@ const handler = nc<Request, Response>();
 
 handler.use(mongoose);
 
+/**
+ * Cron job that runs daily at midnight.
+ * It will reset the daily puzzle for the next day and handle breaking streaks.
+ * This is a secure endpoint that can only be accessed by using the secret token.
+ */
 handler.post(async (req, res) => {
   // Check for the secret API key
   if (req.headers["x-api-key"] !== process.env.CRON_API_KEY) {
@@ -38,6 +43,18 @@ handler.post(async (req, res) => {
           $position: 0,
         },
       },
+    }
+  );
+
+  const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+  // Reset the streaks for users that didn't solve the daily puzzle today
+  await User.updateMany(
+    {
+      $and: [{ lastWin: { $lt: yesterday } }, { winStreak: { $gt: 0 } }],
+    },
+    {
+      winStreak: 0,
     }
   );
 

@@ -1,7 +1,7 @@
 import Board from "../components/Board";
 import Keyboard from "../components/Keyboard";
 import { createContext, useState, Dispatch, SetStateAction } from "react";
-import { boardDefault, words } from "../components/words";
+import { words } from "../components/words";
 import GameOver from "../components/GameOver";
 interface IContext {
   board: string[][];
@@ -30,7 +30,15 @@ interface IContext {
 
 export const GameContext = createContext<Partial<IContext>>({});
 
-function game() {
+function Game() {
+  const boardDefault = [
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+  ];
   const [board, setBoard] = useState(boardDefault);
   const [currAttempt, setCurrAttempt] = useState({
     rowIndex: 0,
@@ -124,4 +132,4 @@ function game() {
   );
 }
 
-export default game;
+export default Game;

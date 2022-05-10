@@ -1,20 +1,171 @@
-table, th, td {
-    text-align: center
+table,
+th,
+td {
+  text-align: center;
 }
 table {
-    min-width: 650px;
+  min-width: 650px;
 }
 
 body {
-    /*background: #C8B4CF;*/
-    background: #EDE6ED;
+  /*background: #C8B4CF;*/
+  background: #ede6ed;
 }
 
 .button {
-    background-color: #A577A3;
+  background-color: #a577a3;
 }
 
 th {
-    font-size: x-large;
-    color: #02C39A;
+  font-size: x-large;
+  color: #02c39a;
+}
+.Game {
+  text-align: center;
+  background-color: #121212;
+  width: 100vw;
+  height: 100vh;
+  /* display: flex; */
+  color: white;
+}
+
+body {
+  padding: 0%;
+  margin: 0;
+}
+
+nav {
+  height: 60px;
+  width: 100%;
+  margin: 0;
+  border-bottom: 1px solid grey;
+  display: grid;
+  place-items: center;
+}
+
+nav h1 {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: white;
+  font-size: 45px;
+}
+
+.board-container {
+  width: 100vw;
+  height: calc(100vh - 170px);
+  display: flex;
+  align-items: center;
+  padding-top: 50px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.board {
+  width: 330px;
+  height: 450px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-gap: 5px;
+  margin: 5px;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100px;
+}
+
+.letter {
+  flex: 33%;
+  /* height: 100%; */
+  height: 50px;
+  width: 50px;
+  border: 1px solid grey;
+  margin: 5px;
+  display: grid;
+  place-items: center;
+  font-weight: bolder;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.keysRow1 {
+  flex: 33%;
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.keysRow2 {
+  flex: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5px;
+}
+
+.keysRow3 {
+  flex: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5px;
+}
+
+.key {
+  width: 40px;
+  height: 56px;
+  margin: 5px;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.enter {
+  width: 80px;
+  font-size: 18px;
+}
+
+.delete {
+  width: 50px;
+  font-size: 30px;
+}
+
+#correct {
+  background-color: #528d4e;
+}
+
+#close {
+  background-color: #b49f39;
+}
+
+#default {
+  background-color: grey;
+}
+
+#defaultGuess {
+  background-color: #3a393c;
+}
+
+#disabledKey {
+  background-color: #3a393c;
+}
+
+#correctKey {
+  background-color: #528d4e;
+}
+
+#closeKey {
+  background-color: #b49f39;
+}
+
+#defaultKey {
+  background-color: grey;
 }

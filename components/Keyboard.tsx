@@ -3,7 +3,8 @@ import Key from "./Key";
 import { GameContext } from "../pages/game";
 
 export default function Keyboard() {
-  const { onEnter, onDelete, onLetter } = useContext(GameContext);
+  const { onEnter, onDelete, onLetter, disabledLetters } =
+    useContext(GameContext);
 
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
   const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
@@ -14,13 +15,13 @@ export default function Keyboard() {
     (event: KeyboardEvent) => {
       const key = event.key;
       if (key === "Enter") {
-        onEnter();
+        onEnter!();
       } else if (key === "Backspace") {
-        onDelete();
+        onDelete!();
       } else {
         keys.forEach((row) => {
           if (row.includes(key.toUpperCase())) {
-            onLetter(key.toUpperCase());
+            onLetter!(key.toUpperCase());
           }
         });
       }
@@ -36,23 +37,42 @@ export default function Keyboard() {
   }, [handleKeyDown]);
 
   return (
-    <div className="keyboard" onKeyDown={handleKeyDown}>
+    // FIXME: figure out type casting for keyboard event handler
+    <div className="keyboard" onKeyDown={handleKeyDown as any}>
       <div className="keysRow1">
-        {keys1.map((key, _) => {
-          return <Key value={key} />;
+        {keys1.map((key, idx) => {
+          return (
+            <Key
+              value={key}
+              disabled={disabledLetters!.includes(key)}
+              key={idx}
+            />
+          );
         })}
       </div>
       <div className="keysRow2">
-        {keys2.map((key, _) => {
-          return <Key value={key} />;
+        {keys2.map((key, idx) => {
+          return (
+            <Key
+              value={key}
+              disabled={disabledLetters!.includes(key)}
+              key={idx}
+            />
+          );
         })}
       </div>
       <div className="keysRow3">
-        <Key value="ENTER" />
-        {keys3.map((key, _) => {
-          return <Key value={key} />;
+        <Key value="ENTER" disabled={false} />
+        {keys3.map((key, idx) => {
+          return (
+            <Key
+              value={key}
+              disabled={disabledLetters!.includes(key)}
+              key={idx}
+            />
+          );
         })}
-        <Key value="DELETE" />
+        <Key value="DELETE" disabled={false} />
       </div>
     </div>
   );

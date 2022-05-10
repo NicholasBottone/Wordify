@@ -1,9 +1,30 @@
 import Board from "../components/Board";
 import Keyboard from "../components/Keyboard";
-import { createContext, useState } from "react";
-import { boardDefault } from "../components/words";
+import { createContext, useState, Dispatch, SetStateAction } from "react";
+import { boardDefault, words } from "../components/words";
+import GameOver from "../components/GameOver";
+interface IContext {
+  board: string[][];
+  setBoard: (board: string[][]) => void;
+  currAttempt: {
+    rowIndex: number;
+    letterIndex: number;
+  };
+  setCurrAttempt: (currAttempt: {
+    rowIndex: number;
+    letterIndex: number;
+  }) => void;
+  onEnter: () => void;
+  onDelete: () => void;
+  onLetter: (value: string) => void;
+  correctWord: string;
+  disabledLetters: string[];
+  setDisabledLetters: Dispatch<SetStateAction<string[]>>;
+  gameOver: { gameOver: boolean; guessedWord: boolean };
+  setGameOver: (gameOver: { gameOver: boolean; guessedWord: boolean }) => void;
+}
 
-export const GameContext = createContext(null);
+export const GameContext = createContext<Partial<IContext>>({});
 
 function game() {
   const [board, setBoard] = useState(boardDefault);
@@ -11,12 +32,37 @@ function game() {
     rowIndex: 0,
     letterIndex: 0,
   });
+  const correctWord = "RIGHT";
+  const [disabledLetters, setDisabledLetters] = useState<string[]>([]);
+  const [gameOver, setGameOver] = useState({
+    gameOver: false,
+    guessedWord: false,
+  });
   const onEnter = () => {
+    // do not allow entering if there are not enough letters
     if (currAttempt.letterIndex != 5) return;
-    setCurrAttempt({
-      rowIndex: currAttempt.rowIndex + 1,
-      letterIndex: 0,
-    });
+
+    const entry = board[currAttempt.rowIndex].join("").toLowerCase();
+
+    // check if the entry is correct. if so, end the game
+    if (correctWord.toLowerCase() === entry) {
+      setGameOver({ gameOver: true, guessedWord: true });
+      return;
+    }
+
+    // check if user reached maximum attempts
+    if (currAttempt.rowIndex == 5) {
+      setGameOver({ gameOver: true, guessedWord: false });
+      return;
+    }
+
+    // check if we should move onto the next row -> only if the word is a valid word
+    if (words.includes(entry)) {
+      setCurrAttempt({
+        rowIndex: currAttempt.rowIndex + 1,
+        letterIndex: 0,
+      });
+    }
   };
   const onDelete = () => {
     if (currAttempt.letterIndex == 0) return;
@@ -28,7 +74,7 @@ function game() {
       letterIndex: currAttempt.letterIndex - 1,
     });
   };
-  const onLetter = (value) => {
+  const onLetter = (value: string) => {
     // Function should not execute if we reached the end of a row
     if (currAttempt.letterIndex > 4) {
       return;
@@ -54,10 +100,15 @@ function game() {
             onEnter,
             onDelete,
             onLetter,
+            correctWord,
+            disabledLetters,
+            setDisabledLetters,
+            gameOver,
+            setGameOver,
           }}
         >
           <Board />
-          <Keyboard />
+          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </GameContext.Provider>
       </div>
     </div>

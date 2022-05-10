@@ -8,6 +8,11 @@ interface Props {
 
 export default function Key({ value, disabled }: Props) {
   const { onEnter, onDelete, onLetter } = useContext(GameContext);
+  let className = "key";
+  if (value === "ENTER") {
+    className += " enter";
+  }
+
   const enterLetter = () => {
     if (value === "ENTER") {
       onEnter!();
@@ -19,7 +24,7 @@ export default function Key({ value, disabled }: Props) {
   };
   return (
     <div
-      className="key"
+      className={className}
       id={disabled ? "disabledKey" : "defaultKey"}
       onClick={enterLetter}
     >

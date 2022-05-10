@@ -128,6 +128,11 @@ nav h1 {
   cursor: pointer;
 }
 
+.enter {
+  width: 80px;
+  font-size: 18px;
+}
+
 #correct {
   background-color: #528d4e;
 }

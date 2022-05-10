@@ -44,6 +44,14 @@ function game() {
 
     const entry = board[currAttempt.rowIndex].join("").toLowerCase();
 
+    // check if we should move onto the next row -> only if the word is a valid word
+    if (words.includes(entry)) {
+      setCurrAttempt({
+        rowIndex: currAttempt.rowIndex + 1,
+        letterIndex: 0,
+      });
+    }
+
     // check if the entry is correct. if so, end the game
     if (correctWord.toLowerCase() === entry) {
       setGameOver({ gameOver: true, guessedWord: true });
@@ -53,15 +61,6 @@ function game() {
     // check if user reached maximum attempts
     if (currAttempt.rowIndex == 5) {
       setGameOver({ gameOver: true, guessedWord: false });
-      return;
-    }
-
-    // check if we should move onto the next row -> only if the word is a valid word
-    if (words.includes(entry)) {
-      setCurrAttempt({
-        rowIndex: currAttempt.rowIndex + 1,
-        letterIndex: 0,
-      });
     }
   };
   const onDelete = () => {

@@ -11,7 +11,9 @@ export default function GameOver() {
           : "You failed!"}
       </h3>
       <h1>Correct Word: {correctWord}</h1>
-      <h1>Attempt: {currAttempt!.rowIndex + 1}</h1>
+      <h1>
+        Attempt: {gameOver!.guessedWord ? currAttempt!.rowIndex : "X"} / 6
+      </h1>
     </div>
   );
 }

@@ -3,8 +3,14 @@ import Key from "./Key";
 import { GameContext } from "../pages/game";
 
 export default function Keyboard() {
-  const { onEnter, onDelete, onLetter, disabledLetters } =
-    useContext(GameContext);
+  const {
+    onEnter,
+    onDelete,
+    onLetter,
+    disabledLetters,
+    correctLetters,
+    closeLetters,
+  } = useContext(GameContext);
 
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
   const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
@@ -45,6 +51,8 @@ export default function Keyboard() {
             <Key
               value={key}
               disabled={disabledLetters!.includes(key)}
+              correct={correctLetters!.includes(key)}
+              close={closeLetters!.includes(key)}
               key={idx}
             />
           );
@@ -56,23 +64,27 @@ export default function Keyboard() {
             <Key
               value={key}
               disabled={disabledLetters!.includes(key)}
+              correct={correctLetters!.includes(key)}
+              close={closeLetters!.includes(key)}
               key={idx}
             />
           );
         })}
       </div>
       <div className="keysRow3">
-        <Key value="ENTER" disabled={false} />
+        <Key value="ENTER" disabled={false} correct={false} close={false} />
         {keys3.map((key, idx) => {
           return (
             <Key
               value={key}
               disabled={disabledLetters!.includes(key)}
+              correct={correctLetters!.includes(key)}
+              close={closeLetters!.includes(key)}
               key={idx}
             />
           );
         })}
-        <Key value="DELETE" disabled={false} />
+        <Key value="DELETE" disabled={false} correct={false} close={false} />
       </div>
     </div>
   );

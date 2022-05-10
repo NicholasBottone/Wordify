@@ -158,6 +158,14 @@ nav h1 {
   background-color: #3a393c;
 }
 
+#correctKey {
+  background-color: #528d4e;
+}
+
+#closeKey {
+  background-color: #b49f39;
+}
+
 #defaultKey {
   background-color: grey;
 }

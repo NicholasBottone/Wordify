@@ -5,9 +5,11 @@ import { GameContext } from "../pages/game";
 interface Props {
   value: string;
   disabled: boolean;
+  correct: boolean;
+  close: boolean;
 }
 
-export default function Key({ value, disabled }: Props) {
+export default function Key({ value, disabled, correct, close }: Props) {
   const { onEnter, onDelete, onLetter } = useContext(GameContext);
   let className = "key";
   if (value === "ENTER") {
@@ -29,7 +31,15 @@ export default function Key({ value, disabled }: Props) {
   return (
     <div
       className={className}
-      id={disabled ? "disabledKey" : "defaultKey"}
+      id={
+        disabled
+          ? "disabledKey"
+          : correct
+          ? "correctKey"
+          : close
+          ? "closeKey"
+          : "defaultKey"
+      }
       onClick={enterLetter}
     >
       {value === "DELETE" ? <FaBackspace /> : value}

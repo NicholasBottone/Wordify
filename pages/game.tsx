@@ -20,6 +20,10 @@ interface IContext {
   correctWord: string;
   disabledLetters: string[];
   setDisabledLetters: Dispatch<SetStateAction<string[]>>;
+  correctLetters: string[];
+  setCorrectLetters: Dispatch<SetStateAction<string[]>>;
+  closeLetters: string[];
+  setCloseLetters: Dispatch<SetStateAction<string[]>>;
   gameOver: { gameOver: boolean; guessedWord: boolean };
   setGameOver: (gameOver: { gameOver: boolean; guessedWord: boolean }) => void;
 }
@@ -34,6 +38,8 @@ function game() {
   });
   const correctWord = "RIGHT";
   const [disabledLetters, setDisabledLetters] = useState<string[]>([]);
+  const [correctLetters, setCorrectLetters] = useState<string[]>([]);
+  const [closeLetters, setCloseLetters] = useState<string[]>([]);
   const [gameOver, setGameOver] = useState({
     gameOver: false,
     guessedWord: false,
@@ -102,6 +108,10 @@ function game() {
             correctWord,
             disabledLetters,
             setDisabledLetters,
+            correctLetters,
+            setCorrectLetters,
+            closeLetters,
+            setCloseLetters,
             gameOver,
             setGameOver,
           }}

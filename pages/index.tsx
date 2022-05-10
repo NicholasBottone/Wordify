@@ -25,12 +25,6 @@ const Home: NextPage = () => {
           Log In
         </Button>
       </Link>
-      <br />
-      <Link href="/profile">
-        <Button variant="light" size="lg">
-          Profile
-        </Button>
-      </Link>
     </Container>
   );
 };

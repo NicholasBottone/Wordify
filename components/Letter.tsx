@@ -15,8 +15,6 @@ export default function Letter({ rowIndex, letterIndex }: Props) {
 
   var letterState = "default";
   if (currAttempt!.rowIndex > rowIndex) {
-    console.log("Inside here");
-    console.log(correct, close);
     letterState = correct ? "correct" : close ? "close" : "defaultGuess";
   }
 
@@ -24,7 +22,7 @@ export default function Letter({ rowIndex, letterIndex }: Props) {
     if (letter != "" && !correct && !close) {
       setDisabledLetters!((prev: string[]) => [...prev, letter]);
     }
-  }, [letter, correct, close]);
+  }, [currAttempt?.rowIndex]);
 
   return (
     <div className="letter" id={letterState}>

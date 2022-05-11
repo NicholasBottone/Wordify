@@ -3,6 +3,8 @@ import Keyboard from "../components/Keyboard";
 import { createContext, useState, Dispatch, SetStateAction } from "react";
 import { words } from "../components/words";
 import GameOver from "../components/GameOver";
+import { useDailyPuzzle } from "../lib/hooks/puzzle";
+
 interface IContext {
   board: string[][];
   setBoard: (board: string[][]) => void;
@@ -44,7 +46,6 @@ function Game() {
     rowIndex: 0,
     letterIndex: 0,
   });
-  const correctWord = "RIGHT";
   const [disabledLetters, setDisabledLetters] = useState<string[]>([]);
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
   const [closeLetters, setCloseLetters] = useState<string[]>([]);
@@ -52,6 +53,17 @@ function Game() {
     gameOver: false,
     guessedWord: false,
   });
+
+  // get the daily puzzle from backend
+  const { puzzle, error, isLoading } = useDailyPuzzle();
+  if (error) {
+    return <div>{error}</div>;
+  } else if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const correctWord = puzzle?.word.toUpperCase();
+
+  // functions that interact with the game
   const onEnter = () => {
     // do not allow entering if there are not enough letters
     if (currAttempt.letterIndex != 5) return;
@@ -67,7 +79,7 @@ function Game() {
     }
 
     // check if the entry is correct. if so, end the game
-    if (correctWord.toLowerCase() === entry) {
+    if (correctWord!.toLowerCase() === entry) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }

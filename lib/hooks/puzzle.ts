@@ -48,7 +48,7 @@ export const submitDailyPuzzleResult = async (
       timeSpent,
     }),
   });
-  const data = await response.json();
+  const data = await response.text();
   if (response.status !== 200) {
     throw new Error(data);
   }

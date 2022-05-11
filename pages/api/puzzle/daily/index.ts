@@ -50,8 +50,9 @@ handler.post(async (req, res) => {
   // Check if the resultBoard is a valid 2d array with dimensions of 6x5
   if (
     !Array.isArray(resultBoard) ||
-    resultBoard.length <= 6 ||
-    resultBoard[0].length === 5
+    resultBoard.length > 6 ||
+    resultBoard.length < 1 ||
+    resultBoard[0].length !== 5
   ) {
     return res.status(400).send("Invalid resultBoard value in request body");
   }
@@ -93,7 +94,7 @@ handler.post(async (req, res) => {
   if (win) puzzleGuessDistribution[numberOfGuesses]++;
 
   // Update the user's profile with the result
-  User.updateOne(
+  await User.updateOne(
     { _id: user.id },
     {
       // Set the user's pastGuesses at index 0 to the resultBoard
@@ -116,7 +117,7 @@ handler.post(async (req, res) => {
     (puzzle.averageTimeToWin * puzzle.wins + timeSpent) / (puzzle.wins + 1);
 
   // Update the puzzle with the result
-  DailyPuzzle.updateOne(
+  await DailyPuzzle.updateOne(
     { _id: puzzle.id },
     {
       $inc: {

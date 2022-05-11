@@ -62,7 +62,7 @@ handler.post(async (req, res) => {
       if (cell < 0 || cell > 2) {
         return res
           .status(400)
-          .send("Invalid resultBoard value in request body");
+          .send("Invalid resultBoard value in request body!");
       }
     }
   }

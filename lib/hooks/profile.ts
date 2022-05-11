@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import IUser from "../../types/IUser";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -11,3 +11,15 @@ export const useProfile = (id: string) => {
 
   return { user: data, error, isLoading: !data && !error };
 };
+
+/**
+ * Friends or unfriends another user profile by their id.
+ */
+export async function setFriend(id: string, friend: boolean) {
+  await fetch("/api/user/friend", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, friend }),
+  });
+  mutate("/api/user");
+}

@@ -45,4 +45,30 @@ handler.post(async (req, res) => {
   res.status(200).send("Success");
 });
 
+/**
+ * Gets the list of populated friend users from the user's friend list.
+ */
+handler.get(async (req, res) => {
+  // Get the request user
+  const user = req.user as IUser;
+
+  // Get the user's friends (populated but excluding email)
+  const userRes = await User.findById(user.id)
+    .populate("friends")
+    .select("friends");
+  if (!userRes) {
+    return res.status(404).send("User not found");
+  }
+
+  // Remove the email and googleId from each friend
+  const friendsList = userRes.friends.map((friend: any) => {
+    const friendObj = friend.toObject();
+    delete friendObj.email;
+    delete friendObj.googleId;
+    return friendObj;
+  });
+
+  res.status(200).send(friendsList);
+});
+
 export default handler;

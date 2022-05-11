@@ -13,6 +13,15 @@ export const useProfile = (id: string) => {
 };
 
 /**
+ * Gets the array of friends' profiles from the user's friend list.
+ */
+export const useFriends = () => {
+  const { data, error } = useSWR<IUser[]>(`/api/user/friend`, fetcher);
+
+  return { friends: data, error, isLoading: !data && !error };
+};
+
+/**
  * Friends or unfriends another user profile by their id.
  */
 export async function setFriend(id: string, friend: boolean) {

@@ -3,12 +3,44 @@ import { Button, Container, ProgressBar, Image } from "react-bootstrap";
 import Link from "next/link";
 import { useUser } from "../lib/hooks/auth";
 import { FaExpand } from "react-icons/fa";
+import { gu } from "date-fns/locale";
+import { max } from "date-fns";
 
 export default function Profile() {
-  const { user } = useUser();
-  const { gamesWon }: any | undefined = user?.gamesWon;
-  const { gamesPlayed }: any | undefined = user?.gamesPlayed;
-  const { winPercentage }: any | undefined = (gamesWon / gamesPlayed) * 100;
+  const { user, isLoading } = useUser();
+  console.log(user);
+  console.log(isLoading);
+  let { gamesWon }: any = user?.gamesPlayed;
+  let { gamesPlayed }: any = user?.gamesPlayed;
+  let { winPercentage }: any =
+    gamesPlayed != 0 ? (gamesWon / gamesPlayed) * 100 : 0;
+  let { winStreak }: any = user?.winStreak;
+  let { maxStreak }: any = user?.longestWinStreak;
+  let { guessDistribution }: any = user?.guessDistribution;
+  let { oneGuess }: any = 0;
+  let { twoGuesses }: any = 0;
+  let { threeGuesses }: any = 0;
+  let { fourGuesses }: any = 0;
+  let { fiveGuesses }: any = 0;
+  let { sixGuesses }: any = 0;
+  let { maxGuesses }: any = 0;
+  if (!isLoading) {
+    gamesWon = user?.gamesWon;
+    gamesPlayed = user?.gamesPlayed;
+    winPercentage = gamesPlayed != 0 ? (gamesWon / gamesPlayed) * 100 : 0;
+    winStreak = user?.winStreak;
+    maxStreak = user?.longestWinStreak;
+    guessDistribution = user?.guessDistribution;
+    oneGuess = guessDistribution[0];
+    twoGuesses = guessDistribution[1];
+    threeGuesses = guessDistribution[2];
+    fourGuesses = guessDistribution[3];
+    fiveGuesses = guessDistribution[4];
+    sixGuesses = guessDistribution[5];
+    maxGuesses = Math.max.apply(null, guessDistribution);
+    console.log(maxGuesses);
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -61,8 +93,8 @@ export default function Profile() {
                     {" "}
                     {winPercentage} {`%`}{" "}
                   </th>
-                  <th scope="col"> {user?.winStreak} </th>
-                  <th scope="col"> {user?.longestWinStreak} </th>
+                  <th scope="col"> {winStreak} </th>
+                  <th scope="col"> {maxStreak} </th>
                 </tr>
               </thead>
               <tbody>
@@ -77,12 +109,36 @@ export default function Profile() {
           </Container>
           <Container className="mt-5 d-grid gap-2">
             <h1> Guess Distribution </h1>
-            <ProgressBar now={100 / 4} label={`1`} variant="success" />
-            <ProgressBar now={0} label={`0`} variant="secondary" />
-            <ProgressBar now={100 / 4} label={`1`} variant="secondary" />
-            <ProgressBar now={100 / 1} label={`4`} variant="secondary" />
-            <ProgressBar now={100 / 4} label={`1`} variant="secondary" />
-            <ProgressBar now={100 / 4} label={`1`} variant="secondary" />
+            <ProgressBar
+              now={oneGuess == 0 ? 0 : 100 / (maxGuesses / oneGuess)}
+              label={oneGuess}
+              variant="success"
+            />
+            <ProgressBar
+              now={twoGuesses == 0 ? 0 : 100 / (maxGuesses / twoGuesses)}
+              label={twoGuesses}
+              variant="secondary"
+            />
+            <ProgressBar
+              now={threeGuesses == 0 ? 0 : 100 / (maxGuesses / threeGuesses)}
+              label={threeGuesses}
+              variant="secondary"
+            />
+            <ProgressBar
+              now={fourGuesses == 0 ? 0 : 100 / (maxGuesses / fourGuesses)}
+              label={fourGuesses}
+              variant="secondary"
+            />
+            <ProgressBar
+              now={fiveGuesses == 0 ? 0 : 100 / (maxGuesses / fiveGuesses)}
+              label={fiveGuesses}
+              variant="secondary"
+            />
+            <ProgressBar
+              now={sixGuesses == 0 ? 0 : 100 / (maxGuesses / sixGuesses)}
+              label={sixGuesses}
+              variant="secondary"
+            />
           </Container>
         </div>
       </div>

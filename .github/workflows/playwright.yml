@@ -19,6 +19,13 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npm test
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
+          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          CRON_API_KEY: ${{ secrets.CRON_API_KEY }}
       - uses: actions/upload-artifact@v2
         if: always()
         with:

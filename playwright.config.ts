@@ -1,11 +1,16 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
+import { loadEnvConfig } from "@next/env";
+
+// @ts-ignore Load environment variables
+process.env.NODE_ENV = "test";
+loadEnvConfig(process.cwd());
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: "./tests/e2e",
+  testDir: "./tests",
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   expect: {
@@ -17,8 +22,8 @@ const config: PlaywrightTestConfig = {
   },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  /* Do not retry */
+  retries: 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -30,8 +35,8 @@ const config: PlaywrightTestConfig = {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "http://localhost:3000",
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    /* Save trace for all tests. See https://playwright.dev/docs/trace-viewer */
+    trace: "on",
   },
 
   /* Configure projects for major browsers */
@@ -42,18 +47,6 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
     },
-    {
-      name: "Desktop Firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-      },
-    },
-    {
-      name: "Mobile Safari",
-      use: {
-        ...devices["iPhone 12"],
-      },
-    },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
@@ -61,7 +54,7 @@ const config: PlaywrightTestConfig = {
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "npm run build && npm run start",
+    command: "npm run dev",
     url: "http://localhost:3000",
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,

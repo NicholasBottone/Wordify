@@ -3,7 +3,7 @@ import { devices } from "@playwright/test";
 import { loadEnvConfig } from "@next/env";
 
 // @ts-ignore Load environment variables
-process.env.NODE_ENV = "test";
+// process.env.NODE_ENV = "test";
 loadEnvConfig(process.cwd());
 
 /**
@@ -54,7 +54,7 @@ const config: PlaywrightTestConfig = {
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "npm run dev",
+    command: "npm run build && npm run start",
     url: "http://localhost:3000",
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,

@@ -7,6 +7,15 @@ A social word game web app! Built on Next.js, React, Mongoose, React-Bootstrap, 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Scripts
+
+- To install dependencies: `npm install`
+- To run the app on the development server: `npm run dev`
+- To build the app for production: `npm run build`
+- To run the app in production (after it has been built): `npm start`
+- To run the test suites: `npm test`
+- To run the linting rules: `npm run lint`
+
 ## Specification
 
 [Specification](/Specifications.md)

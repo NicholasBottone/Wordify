@@ -4,7 +4,7 @@ This guide details some of the design patterns and overall philosophies that sho
 
 ## IDE & Plugins
 
-We use [Visual Studio Code](https://code.visualstudio.com/) with the following extensions: [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode).
+We use [Visual Studio Code](https://code.visualstudio.com/) with the following extensions: [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode). If you plan on running tests, install the [Playwright](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) extension.
 
 ## Git
 
@@ -53,3 +53,7 @@ Use [react-spring](https://www.react-spring.io/)!
 ## Images
 
 Include images (and other static files) in the `/public` directory and then reference them in your code from the `src` attribute.
+
+## Testing
+
+We use [Playwright](https://playwright.dev/) for end-to-end testing of the application. Playwright is a headless browser testing framework that allows you to test your application in a browser without having to install a browser. Install the [Playwright](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) extension in Visual Studio Code to more easily run the tests, record tests, and follow the test output. To run the tests from the terminal, run `npm test`. You must shut down your dev server before running the tests! You can read the Playwright reports and view the recorded trace outputs. It is highly recommended that you at minimum read the [Playwright Getting Started guide](https://playwright.dev/docs/intro).

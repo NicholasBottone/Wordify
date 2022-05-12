@@ -1,7 +1,9 @@
-name: Playwright Tests 🧪
+# ESLint and Playwright workflow for GitHub Actions
+name: "🧪 Run Tests"
 on: push
 jobs:
   test:
+    name: "Lint and test 🤓"
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -11,6 +13,8 @@ jobs:
           node-version: "14.x"
       - name: Install dependencies
         run: npm ci
+      - name: Run linter
+        run: npm run lint
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests

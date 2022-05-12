@@ -21,6 +21,7 @@ export default function Profile() {
   let { fiveGuesses }: any = 0;
   let { sixGuesses }: any = 0;
   let { maxGuesses }: any = 0;
+  let { times }: any = 0;
   if (user) {
     gamesWon = user?.gamesWon;
     gamesPlayed = user?.gamesPlayed;
@@ -34,6 +35,8 @@ export default function Profile() {
     fourGuesses = guessDistribution[3];
     fiveGuesses = guessDistribution[4];
     sixGuesses = guessDistribution[5];
+    times = user?.pastTimes;
+    console.log(times);
     maxGuesses = Math.max.apply(null, guessDistribution);
     console.log(maxGuesses);
   }

@@ -34,7 +34,15 @@ export default function Letter({ rowIndex, letterIndex }: Props) {
         setDisabledLetters!((prev: string[]) => [...prev, letter]);
       }
     }
-  }, [currAttempt?.rowIndex]);
+  }, [
+    currAttempt?.rowIndex,
+    close,
+    correct,
+    letter,
+    setCloseLetters,
+    setCorrectLetters,
+    setDisabledLetters,
+  ]);
 
   return (
     <div className="letter" id={letterState}>

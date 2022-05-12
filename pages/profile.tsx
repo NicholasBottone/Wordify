@@ -28,7 +28,7 @@ export default function Profile() {
           </h4>
           <br />
           <br />
-          <Link href="/profile">
+          <Link href="/game">
             <Button variant="secondary" size="lg" className="">
               Real Word of the Day <FaExpand />
             </Button>

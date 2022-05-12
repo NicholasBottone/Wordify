@@ -1,0 +1,16 @@
+# Nightly Cron workflow for GitHub Actions
+name: "⏰ Nightly Cron"
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  nightly-cron:
+    name: "Update the daily puzzles 📆"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Submit POST request"
+        run: |
+          curl --request POST \
+          --url 'https://wordifygame.vercel.app/api/cron/midnight' \
+          --header 'x-api-key: ${{ secrets.CRON_API_KEY }}'

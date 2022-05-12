@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 import IDailyPuzzle from "../types/IDailyPuzzle";
 
 const DailyPuzzleSchema = new Schema({
@@ -28,4 +28,5 @@ const DailyPuzzleSchema = new Schema({
   },
 });
 
-export default model<IDailyPuzzle>("DailyPuzzle", DailyPuzzleSchema);
+export default mongoose.models.DailyPuzzle ||
+  model<IDailyPuzzle>("DailyPuzzle", DailyPuzzleSchema);

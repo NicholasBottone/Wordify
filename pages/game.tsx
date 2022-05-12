@@ -1,22 +1,135 @@
-import React from "react";
-import Link from "next/link";
-import { Container } from "react-bootstrap";
+import Board from "../components/Board";
+import Keyboard from "../components/Keyboard";
+import { createContext, useState, Dispatch, SetStateAction } from "react";
+import { words } from "../components/words";
+import GameOver from "../components/GameOver";
+interface IContext {
+  board: string[][];
+  setBoard: (board: string[][]) => void;
+  currAttempt: {
+    rowIndex: number;
+    letterIndex: number;
+  };
+  setCurrAttempt: (currAttempt: {
+    rowIndex: number;
+    letterIndex: number;
+  }) => void;
+  onEnter: () => void;
+  onDelete: () => void;
+  onLetter: (value: string) => void;
+  correctWord: string;
+  disabledLetters: string[];
+  setDisabledLetters: Dispatch<SetStateAction<string[]>>;
+  correctLetters: string[];
+  setCorrectLetters: Dispatch<SetStateAction<string[]>>;
+  closeLetters: string[];
+  setCloseLetters: Dispatch<SetStateAction<string[]>>;
+  gameOver: { gameOver: boolean; guessedWord: boolean };
+  setGameOver: (gameOver: { gameOver: boolean; guessedWord: boolean }) => void;
+}
 
-export default function Game() {
+export const GameContext = createContext<Partial<IContext>>({});
+
+function Game() {
+  const boardDefault = [
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+  ];
+  const [board, setBoard] = useState(boardDefault);
+  const [currAttempt, setCurrAttempt] = useState({
+    rowIndex: 0,
+    letterIndex: 0,
+  });
+  const correctWord = "RIGHT";
+  const [disabledLetters, setDisabledLetters] = useState<string[]>([]);
+  const [correctLetters, setCorrectLetters] = useState<string[]>([]);
+  const [closeLetters, setCloseLetters] = useState<string[]>([]);
+  const [gameOver, setGameOver] = useState({
+    gameOver: false,
+    guessedWord: false,
+  });
+  const onEnter = () => {
+    // do not allow entering if there are not enough letters
+    if (currAttempt.letterIndex != 5) return;
+
+    const entry = board[currAttempt.rowIndex].join("").toLowerCase();
+
+    // check if we should move onto the next row -> only if the word is a valid word
+    if (words.includes(entry)) {
+      setCurrAttempt({
+        rowIndex: currAttempt.rowIndex + 1,
+        letterIndex: 0,
+      });
+    }
+
+    // check if the entry is correct. if so, end the game
+    if (correctWord.toLowerCase() === entry) {
+      setGameOver({ gameOver: true, guessedWord: true });
+      return;
+    }
+
+    // check if user reached maximum attempts
+    if (currAttempt.rowIndex == 5) {
+      setGameOver({ gameOver: true, guessedWord: false });
+    }
+  };
+  const onDelete = () => {
+    if (currAttempt.letterIndex == 0) return;
+    const newBoard = [...board];
+    newBoard[currAttempt.rowIndex][currAttempt.letterIndex - 1] = "";
+    setBoard(newBoard);
+    setCurrAttempt({
+      ...currAttempt,
+      letterIndex: currAttempt.letterIndex - 1,
+    });
+  };
+  const onLetter = (value: string) => {
+    // Function should not execute if we reached the end of a row
+    if (currAttempt.letterIndex > 4) {
+      return;
+    }
+    const newBoard = [...board];
+    newBoard[currAttempt.rowIndex][currAttempt.letterIndex] = value;
+    setBoard(newBoard);
+    setCurrAttempt({
+      ...currAttempt,
+      letterIndex: currAttempt.letterIndex + 1,
+    });
+  };
+
   return (
-    <Container className="text-center">
-      <h1>Hello, world!</h1>
-      <Link href="/about">About</Link>
-      <h1 className="text-centered">
-        ⬜⬜⬜⬜⬜ <br />
-        ⬜⬜⬜⬜⬜ <br />
-        ⬜⬜⬜⬜⬜ <br />
-        ⬜⬜⬜⬜⬜ <br />
-        ⬜⬜⬜⬜⬜ <br />
-      </h1>
-      <h2 className="text-centered">
-        Q W E R T Y U I O P <br />A S D F G H J K L <br />Z X C V B N M <br />
-      </h2>
-    </Container>
+    <div className="Game">
+      <div className="board-container">
+        <GameContext.Provider
+          value={{
+            board,
+            setBoard,
+            currAttempt,
+            setCurrAttempt,
+            onEnter,
+            onDelete,
+            onLetter,
+            correctWord,
+            disabledLetters,
+            setDisabledLetters,
+            correctLetters,
+            setCorrectLetters,
+            closeLetters,
+            setCloseLetters,
+            gameOver,
+            setGameOver,
+          }}
+        >
+          <Board />
+          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+        </GameContext.Provider>
+      </div>
+    </div>
   );
 }
+
+export default Game;

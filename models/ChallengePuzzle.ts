@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 import IChallengePuzzle from "../types/IChallengePuzzle";
 
 const ChallengePuzzleSchema = new Schema({
@@ -53,7 +53,5 @@ const ChallengePuzzleSchema = new Schema({
   },
 });
 
-export default model<IChallengePuzzle>(
-  "ChallengePuzzle",
-  ChallengePuzzleSchema
-);
+export default mongoose.models.ChallengePuzzle ||
+  model<IChallengePuzzle>("ChallengePuzzle", ChallengePuzzleSchema);

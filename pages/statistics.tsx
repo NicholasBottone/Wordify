@@ -3,8 +3,6 @@ import { Button, Container, ProgressBar, Image } from "react-bootstrap";
 import Link from "next/link";
 import { useUser } from "../lib/hooks/auth";
 import { FaExpand } from "react-icons/fa";
-import { gu } from "date-fns/locale";
-import { max } from "date-fns";
 
 export default function Profile() {
   const { user, isLoading } = useUser();
@@ -64,7 +62,7 @@ export default function Profile() {
           </h4>
           <br />
           <br />
-          <Link href="/profile">
+          <Link href="/game">
             <Button variant="secondary" size="lg" className="">
               Real Word of the Day <FaExpand />
             </Button>
@@ -87,7 +85,7 @@ export default function Profile() {
             <h1>Statistics </h1>
             <table className="Statistics">
               <thead>
-                <tr>
+                <tr id="statisticRow">
                   <th scope="col"> {gamesPlayed}</th>
                   <th scope="col">
                     {" "}
@@ -98,7 +96,7 @@ export default function Profile() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr id="statisticRow">
                   <td scope="row">Played</td>
                   <td>Win %</td>
                   <td>Current Streak</td>

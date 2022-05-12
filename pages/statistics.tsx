@@ -8,13 +8,12 @@ export default function Profile() {
   const { user, isLoading } = useUser();
   console.log(user);
   console.log(isLoading);
-  let { gamesWon }: any = user?.gamesPlayed;
-  let { gamesPlayed }: any = user?.gamesPlayed;
-  let { winPercentage }: any =
-    gamesPlayed != 0 ? (gamesWon / gamesPlayed) * 100 : 0;
-  let { winStreak }: any = user?.winStreak;
-  let { maxStreak }: any = user?.longestWinStreak;
-  let { guessDistribution }: any = user?.guessDistribution;
+  let { gamesWon }: any = 0;
+  let { gamesPlayed }: any = 0;
+  let { winPercentage }: any = 0;
+  let { winStreak }: any = 0;
+  let { maxStreak }: any = 0;
+  let { guessDistribution }: any = 0;
   let { oneGuess }: any = 0;
   let { twoGuesses }: any = 0;
   let { threeGuesses }: any = 0;
@@ -22,7 +21,7 @@ export default function Profile() {
   let { fiveGuesses }: any = 0;
   let { sixGuesses }: any = 0;
   let { maxGuesses }: any = 0;
-  if (!isLoading) {
+  if (user) {
     gamesWon = user?.gamesWon;
     gamesPlayed = user?.gamesPlayed;
     winPercentage = gamesPlayed != 0 ? (gamesWon / gamesPlayed) * 100 : 0;

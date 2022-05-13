@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, Container, Image } from "react-bootstrap";
 import Link from "next/link";
-import { FaExpand } from "react-icons/fa";
 import { useUser, login } from "../lib/hooks/auth";
-import Row from "../components/ProfileBoardRow";
 
 export default function Profile() {
   const { user } = useUser();

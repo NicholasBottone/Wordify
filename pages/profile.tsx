@@ -6,6 +6,42 @@ import { useUser, login } from "../lib/hooks/auth";
 
 export default function Profile() {
   const { user } = useUser();
+  let todaysGuess: any = 0;
+  let board: any;
+  if (user) {
+    todaysGuess = user?.pastGuesses[0];
+  }
+  if (!todaysGuess) {
+    board = <h4> You have not played today's word </h4>;
+  } else {
+    // map used rows to appropriate squares
+    board = (
+      <div>
+        {todaysGuess.map((row: any) => {
+          return (
+            <div>
+              (
+              <h4>
+                {" "}
+                {row.map((cell: any) => {
+                  if (cell == 2) {
+                    return "🟩";
+                  } else if (cell == 1) {
+                    return "🟨";
+                  } else {
+                    return "⬛️";
+                  }
+                })}
+              </h4>
+              <br />)
+            </div>
+          );
+        })}
+        {/* fill with gray squares for unused rows */}
+      </div>
+    );
+  }
+
   if (user) {
     return (
       <div className="container">
@@ -51,13 +87,8 @@ export default function Profile() {
             </Container>
             <Container className="mt-5 d-grid gap-2"></Container>
             <h1> Board </h1>
-            <h1 className="text-centered">
-              ⬜⬜⬜⬜⬜ <br />
-              ⬜⬜⬜⬜⬜ <br />
-              ⬜⬜⬜⬜⬜ <br />
-              ⬜⬜⬜⬜⬜ <br />
-              ⬜⬜⬜⬜⬜ <br />
-            </h1>
+            <h1 className="text-centered"></h1>
+            {board}
           </div>
         </div>
       </div>

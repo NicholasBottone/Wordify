@@ -3,7 +3,7 @@ import { Button, Container, Image } from "react-bootstrap";
 import Link from "next/link";
 import { FaExpand } from "react-icons/fa";
 import { useUser, login } from "../lib/hooks/auth";
-import Row from "../components/ProfileBoardRow"
+import Row from "../components/ProfileBoardRow";
 
 export default function Profile() {
   const { user } = useUser();
@@ -13,15 +13,14 @@ export default function Profile() {
     todaysGuess = user?.pastGuesses[0];
   }
   if (!todaysGuess) {
-    board = <h4> You have not played today's word </h4>;
+    board = <h4> You have not played today&apos;s word </h4>;
   } else {
     // map used rows to appropriate squares
     board = (
       <div>
-        {todaysGuess.map((row: any) => {
+        {todaysGuess.map((row: any, idx) => {
           return (
-            <div>
-              
+            <div key={idx}>
               <h1>
                 {" "}
                 {row.map((cell: any) => {
@@ -80,13 +79,12 @@ export default function Profile() {
             </Container>
             <Container className="mt-5 d-grid gap-2">
               <div className="col-sm-6 text-center">
-              <h2> Today's Board </h2>
+                <h2> Today&apos;s Board </h2>
 
-              <h1 className="text-centered"></h1>
-              {board}
+                <h1 className="text-centered"></h1>
+                {board}
               </div>
             </Container>
-            
           </div>
         </div>
       </div>

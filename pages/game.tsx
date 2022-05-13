@@ -212,7 +212,7 @@ function Game() {
 
   // error check the loading of puzzle
   if (user && puzzleError) {
-    return <div>You cannot play today's puzzle without logging in!</div>;
+    return <div>You cannot play today&apos;s puzzle without logging in!</div>;
   } else if (puzzleIsLoading) {
     return <div>Puzzle is loading! Hang in there!</div>;
   }

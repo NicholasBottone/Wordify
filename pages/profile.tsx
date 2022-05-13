@@ -18,7 +18,7 @@ export default function Profile() {
     // map used rows to appropriate squares
     board = (
       <div>
-        {todaysGuess.map((row: any, idx) => {
+        {todaysGuess.map((row: any, idx: number) => {
           return (
             <div key={idx}>
               <h1>

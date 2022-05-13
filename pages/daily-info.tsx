@@ -21,7 +21,7 @@ export default function Summary() {
   if (error) {
     return (
       <h1 className="text-centered">
-        Looks like there was a problem fetching the summary data. Sorry!
+        Looks like there was a problem fetching the summary data. Try refreshing please!
       </h1>
     );
   }

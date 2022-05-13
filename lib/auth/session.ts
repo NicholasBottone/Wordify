@@ -4,11 +4,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import NextSession from "next-session";
 import { promisifyStore } from "next-session/lib/compat";
 
-export default async (
+export default async function setupSession(
   req: NextApiRequest,
   res: NextApiResponse,
   next: () => void
-) => {
+) {
   const store = promisifyStore(
     new MongoStore({
       client: mongoose.connection.getClient(),
@@ -30,4 +30,4 @@ export default async (
 
   await session(req, res);
   next();
-};
+}

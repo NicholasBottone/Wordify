@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useContext } from "react";
+import React, { useCallback, useEffect, useContext, useMemo } from "react";
 import Key from "./Key";
 import { GameContext } from "../pages/game";
 
@@ -12,10 +12,16 @@ export default function Keyboard() {
     closeLetters,
   } = useContext(GameContext);
 
-  const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
-  const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-  const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
-  const keys = [keys1, keys2, keys3];
+  const keys1 = useMemo(
+    () => ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    []
+  );
+  const keys2 = useMemo(
+    () => ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    []
+  );
+  const keys3 = useMemo(() => ["Z", "X", "C", "V", "B", "N", "M"], []);
+  const keys = useMemo(() => [keys1, keys2, keys3], [keys1, keys2, keys3]);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -32,7 +38,7 @@ export default function Keyboard() {
         });
       }
     },
-    [onEnter, onDelete, onLetter]
+    [onEnter, onDelete, onLetter, keys]
   );
 
   useEffect(() => {

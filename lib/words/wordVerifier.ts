@@ -1,5 +1,4 @@
-import React from "react";
-import { words } from "../../components/words";
+import { words } from "./words";
 
 class TrieNode {
   public letter: string;

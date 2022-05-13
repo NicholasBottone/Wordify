@@ -7,10 +7,10 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import GameOver, { SendResults } from "../components/GameOver";
+import GameOver from "../components/GameOver";
 import { useDailyPuzzle, submitDailyPuzzleResult } from "../lib/hooks/puzzle";
-import WordVerifier from "../lib/wordVerifier/WordVerifier";
 import { useUser } from "../lib/hooks/auth";
+import WordVerifier from "../lib/words/wordVerifier";
 
 interface IContext {
   board: string[][];
@@ -77,12 +77,8 @@ function Game() {
     }
 
     // check if the user has played the game today
-    if (user?.pastGuesses[0]) {
-      // they have played
-      console.log("already played");
-    } else {
+    if (!user?.pastGuesses[0]) {
       // they have not played
-      console.log("Submitting backend result");
       const letterStates = board
         .map((row) =>
           row.map((letter, letterIndex) => {
@@ -96,7 +92,6 @@ function Game() {
 
       // send the results to backend
       submitDailyPuzzleResult(letterStates, gameOver.guessedWord, 1);
-      SendResults({ board, gameOver, currAttempt, correctWord });
     }
   }, [gameOver.gameOver]);
 

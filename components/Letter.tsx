@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { GameContext } from "../pages/game";
 
@@ -20,7 +21,7 @@ export default function Letter({ rowIndex, letterIndex }: Props) {
   // if true, the letter will be green
   const correct = letter === correctWord![letterIndex];
   // if true, the letter will be yellow
-  var close = !correct && letter !== "" && correctWord!.includes(letter);
+  let close = !correct && letter !== "" && correctWord!.includes(letter);
 
   // get the number of times letter shows up in guess.
   const count = guess.filter((l) => l === letter).length;
@@ -32,7 +33,7 @@ export default function Letter({ rowIndex, letterIndex }: Props) {
       [] as number[]
     );
     // get the indices of all of the letters inside the correct word that are the same as letter
-    var correctIndices = correctWord!
+    const correctIndices = correctWord!
       .split("")
       .reduce(
         (acc, l, i) => (l === letter ? [...acc, i] : acc),
@@ -81,15 +82,7 @@ export default function Letter({ rowIndex, letterIndex }: Props) {
         setDisabledLetters!((prev: string[]) => [...prev, letter]);
       }
     }
-  }, [
-    currAttempt?.rowIndex,
-    close,
-    correct,
-    letter,
-    setCloseLetters,
-    setCorrectLetters,
-    setDisabledLetters,
-  ]);
+  }, [currAttempt?.rowIndex]);
 
   return (
     <div className="letter" id={letterState}>

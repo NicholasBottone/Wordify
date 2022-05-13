@@ -1,15 +1,12 @@
 import React from "react";
-import { Button, Container, ProgressBar, Image } from "react-bootstrap";
+import { Button, Container, Image } from "react-bootstrap";
 import Link from "next/link";
 import { FaExpand } from "react-icons/fa";
-import { useUser } from "../lib/hooks/auth";
-import { login } from "../lib/hooks/auth";
-import game from "./game";
-import Row from "../components/ProfileBoardRow"
-import { getImageSize } from "next/dist/server/image-optimizer";
+import { useUser, login } from "../lib/hooks/auth";
 
 export default function Profile() {
   const { user } = useUser();
+<<<<<<< HEAD
   console.log(user);
   const todayGuess: any = user?.pastGuesses[0];
   console.log(todayGuess);
@@ -19,6 +16,8 @@ export default function Profile() {
   // let { todayGuessFour }: any = 0;
   // let { todayGuessFive }: any = 0;
   // let { todayGuessSix }: any = 0;
+=======
+>>>>>>> ac77a1b53b3a53d3733c6743f73651490604bf9f
   if (user) {
     return (
       <div className="container">
@@ -75,16 +74,16 @@ export default function Profile() {
         </div>
       </div>
     );
-  } 
+  }
   return (
     <Container className="text-center">
       <br />
       <h4> Log in to access profile page!</h4>
       <br />
-    <Button variant="light" size="lg" onClick={login}>
-    {" "}
-    Log In{" "}
-  </Button>
-  </Container>
-  )
+      <Button variant="light" size="lg" onClick={login}>
+        {" "}
+        Log In{" "}
+      </Button>
+    </Container>
+  );
 }

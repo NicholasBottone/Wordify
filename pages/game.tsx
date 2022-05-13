@@ -137,7 +137,6 @@ function Game() {
           })
         )
         .slice(0, currAttempt.rowIndex);
-      console.log(letterStates);
       // send the results to backend
       submitDailyPuzzleResult(letterStates, gameOver.guessedWord, 1);
     }

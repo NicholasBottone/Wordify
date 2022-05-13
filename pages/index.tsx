@@ -2,8 +2,12 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { Button, Container, Image } from "react-bootstrap";
 import React from "react";
+import { login } from "../lib/hooks/auth";
+import { useUser } from "../lib/hooks/auth";
 
 const Home: NextPage = () => {
+  const { user } = useUser();
+
   return (
     <Container className="text-center">
       <Image
@@ -14,23 +18,29 @@ const Home: NextPage = () => {
         className="d-inline-block align-top"
       />
       <h1>Wordify</h1>
-      <Link href="/game">
+      {user ? (
+        <Link href="/game">
         <Button variant="light" size="lg">
-          Play As Guest
+          Play!
         </Button>
       </Link>
+      ) : (
+        <Link href="/game">
+        <Button variant="light" size="lg">
+          Play as Guest
+        </Button>
+      </Link>
+      )}
       <br />
-      <Link href="/#">
-        <Button variant="light" size="lg">
-          Log In
-        </Button>
-      </Link>
       <br />
-      <Link href="/profile">
-        <Button variant="light" size="lg">
-          Profile
+      { user ? (
+        <br />
+      ) : (
+        <Button variant="light" size="lg" onClick={login}>
+          {" "}
+          Log In{" "}
         </Button>
-      </Link>
+      )}
     </Container>
   );
 };

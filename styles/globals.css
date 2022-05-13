@@ -1,14 +1,15 @@
+
 table,
 th,
 td {
   text-align: center;
 }
+
 table {
   min-width: 650px;
 }
 
 body {
-  /*background: #C8B4CF;*/
   background: #bfb2c4;
 }
 
@@ -16,10 +17,12 @@ body {
   background-color: #a577a3;
 }
 
+
 th {
   font-size: x-large;
   color: #02c39a;
 }
+
 .Game {
   text-align: center;
   background-color: #bfb2c4;
@@ -33,6 +36,7 @@ body {
   padding: 0%;
   margin: 0;
 }
+
 
 nav {
   height: 60px;
@@ -76,7 +80,7 @@ nav h1 {
   width: 100%;
 }
 
-.row {
+#gameRow {
   display: grid;
   grid-gap: 5px;
   margin: 5px;
@@ -143,6 +147,11 @@ nav h1 {
   font-size: 30px;
 }
 
+.progress-label {
+  float: left;
+  margin-right: 1em;
+}
+
 #correct {
   background-color: #66a05f;
   color: white;
@@ -180,3 +189,6 @@ nav h1 {
 #defaultKey {
   background-color: #d2d6d9;
 }
+
+
+

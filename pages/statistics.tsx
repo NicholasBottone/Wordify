@@ -23,11 +23,11 @@ export default function Profile() {
   let { sixGuesses }: any = 0;
   let { maxGuesses }: any = 0;
   let { times }: any = 0;
-  let { averageTime }: any = 0;
+  let { averageTime }: any = parseInt("0");
   if (user) {
     gamesWon = user?.gamesWon;
     gamesPlayed = user?.gamesPlayed;
-    winPercentage = gamesPlayed != 0 ? (gamesWon / gamesPlayed) * 100 : 0;
+    winPercentage = gamesPlayed != 0 ? Math.round((gamesWon / gamesPlayed) * 100) : 0;
     winStreak = user?.winStreak;
     maxStreak = user?.longestWinStreak;
     guessDistribution = user?.guessDistribution;
@@ -38,10 +38,22 @@ export default function Profile() {
     fiveGuesses = guessDistribution[4];
     sixGuesses = guessDistribution[5];
     times = user?.pastTimes;
-    averageTime = times.length;
-    console.log("times is" + times);
     maxGuesses = Math.max.apply(null, guessDistribution);
-    console.log(maxGuesses);
+
+
+    // for the calculation of average time.
+
+    if (times.length > 0) {
+      if (times[0]) {
+        averageTime = times[0];
+      }
+    }
+    for (var i = 1; i < times.length; i++) {
+      if (times[i]) {
+        averageTime = parseInt(averageTime) + parseInt(times[i]);
+      }
+  }
+    averageTime = Math.round(averageTime / times.length);
   }
 
   if (user) {
@@ -66,7 +78,7 @@ export default function Profile() {
             <h4>
               {user?.givenName} {user?.familyName}
             </h4>
-            {user?.bio}]
+            {user?.bio}
             <br />
             <br />
             <Link href="/game">
@@ -100,6 +112,7 @@ export default function Profile() {
                     </th>
                     <th scope="col"> {winStreak} </th>
                     <th scope="col"> {maxStreak} </th>
+                    <th scope="col"> {averageTime} Sec. </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -115,36 +128,48 @@ export default function Profile() {
             </Container>
             <Container className="mt-5 d-grid gap-2">
               <h1> Guess Distribution </h1>
+              <p><h6 className="progress-label">1</h6>
               <ProgressBar
                 now={oneGuess == 0 ? 0 : 100 / (maxGuesses / oneGuess)}
-                label={oneGuess}
+                label= {oneGuess}
                 variant="success"
               />
+              </p>
+              <p><h6 className="progress-label">2</h6>
               <ProgressBar
                 now={twoGuesses == 0 ? 0 : 100 / (maxGuesses / twoGuesses)}
                 label={twoGuesses}
-                variant="secondary"
+                variant="success"
               />
+              </p>
+              <p><h6 className="progress-label">3</h6>
               <ProgressBar
                 now={threeGuesses == 0 ? 0 : 100 / (maxGuesses / threeGuesses)}
                 label={threeGuesses}
-                variant="secondary"
+                variant="success"
               />
+              </p>
+              <p><h6 className="progress-label">4</h6>
               <ProgressBar
                 now={fourGuesses == 0 ? 0 : 100 / (maxGuesses / fourGuesses)}
                 label={fourGuesses}
-                variant="secondary"
+                variant="success"
               />
+              </p>
+              <p><h6 className="progress-label">5</h6>
               <ProgressBar
                 now={fiveGuesses == 0 ? 0 : 100 / (maxGuesses / fiveGuesses)}
                 label={fiveGuesses}
-                variant="secondary"
+                variant="success"
               />
+              </p>
+              <p><h6 className="progress-label">6</h6>
               <ProgressBar
                 now={sixGuesses == 0 ? 0 : 100 / (maxGuesses / sixGuesses)}
                 label={sixGuesses}
-                variant="secondary"
+                variant="success"
               />
+              </p>
             </Container>
           </div>
         </div>

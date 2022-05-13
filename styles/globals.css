@@ -143,6 +143,11 @@ nav h1 {
   font-size: 30px;
 }
 
+.progress-label {
+  float: left;
+  margin-right: 1em;
+}
+
 #correct {
   background-color: #528d4e;
 }

@@ -4,9 +4,21 @@ import Link from "next/link";
 import { FaExpand } from "react-icons/fa";
 import { useUser } from "../lib/hooks/auth";
 import { login } from "../lib/hooks/auth";
+import game from "./game";
+import Row from "../components/ProfileBoardRow"
+import { getImageSize } from "next/dist/server/image-optimizer";
 
 export default function Profile() {
   const { user } = useUser();
+  // console.log(user);
+  // const todayGuess: [Number, Number, Number, Number, Number] = user?.pastGuesses[user?.pastGuesses.length - 1];
+  // console.log(todayGuess);
+  // let { todayGuessOne }: any = Row(todayGuess[0]);
+  // let { todayGuessTwo }: any = 0;
+  // let { todayGuessThree }: any = 0;
+  // let { todayGuessFour }: any = 0;
+  // let { todayGuessFive }: any = 0;
+  // let { todayGuessSix }: any = 0;
   if (user) {
     return (
       <div className="container">
@@ -28,7 +40,7 @@ export default function Profile() {
             <h4>
               {user?.givenName} {user?.familyName}
             </h4>
-            {user?.bio}]
+            {user?.bio}
             <br />
             <br />
             <Link href="/game">

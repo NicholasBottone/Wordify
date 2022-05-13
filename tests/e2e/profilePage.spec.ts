@@ -1,6 +1,7 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
+import get2fa from "../2fa";
 
-test("Login and access profile page", async ({ page }) => {
+test("Login and visit profile page", async ({ page }) => {
   // Go to http://localhost:3000/
   await page.goto("http://localhost:3000/");
 
@@ -10,13 +11,10 @@ test("Login and access profile page", async ({ page }) => {
     page.locator("text=Login").click(),
   ]);
 
-  // Click [aria-label="Email or phone"]
-  await page.locator('[aria-label="Email or phone"]').click();
-
   // Fill [aria-label="Email or phone"]
   await page
     .locator('[aria-label="Email or phone"]')
-    .fill(process.env.TEST_USERNAME!);
+    .fill("mymocktesterwowie@gmail.com");
 
   // Press Enter
   await Promise.all([
@@ -27,12 +25,21 @@ test("Login and access profile page", async ({ page }) => {
   // Fill [aria-label="Enter your password"]
   await page
     .locator('[aria-label="Enter your password"]')
-    .fill(process.env.TEST_PASSWORD!);
+    .fill("37}`Z^G]Zab26_#b");
 
   // Press Enter
   await Promise.all([
     page.waitForNavigation(),
     page.locator('[aria-label="Enter your password"]').press("Enter"),
+  ]);
+
+  // Fill [aria-label="Enter code"]
+  await page.locator('[aria-label="Enter code"]').fill(get2fa());
+
+  // Press Enter
+  await Promise.all([
+    page.waitForNavigation({ url: "http://localhost:3000/" }),
+    page.locator('[aria-label="Enter code"]').press("Enter"),
   ]);
 
   // Click a[role="button"]:has-text("Wowie Tester")
@@ -43,8 +50,4 @@ test("Login and access profile page", async ({ page }) => {
     page.waitForNavigation({ url: "http://localhost:3000/profile" }),
     page.locator('a:has-text("Profile")').click(),
   ]);
-
-  // Click text=Home
-  await page.locator("text=Home").click();
-  await expect(page).toHaveURL("http://localhost:3000/");
 });

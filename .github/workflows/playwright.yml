@@ -23,6 +23,7 @@ jobs:
           MONGODB_URL: ${{ secrets.MONGODB_URL }}
           TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          TEST_2FA: ${{ secrets.TEST_2FA }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           CRON_API_KEY: ${{ secrets.CRON_API_KEY }}

@@ -12,6 +12,8 @@ import { useDailyPuzzle, submitDailyPuzzleResult } from "../lib/hooks/puzzle";
 import { useUser } from "../lib/hooks/auth";
 import WordVerifier from "../lib/words/wordVerifier";
 import Timer from "../components/Timer";
+import { words } from "../lib/words/words";
+import IDailyPuzzle from "../types/IDailyPuzzle";
 
 interface IContext {
   board: string[][];
@@ -50,6 +52,7 @@ function Game() {
     ["", "", "", "", ""],
   ];
   const [board, setBoard] = useState(boardDefault);
+  const [correctWord, setCorrectWord] = useState<string>();
   const [currAttempt, setCurrAttempt] = useState({
     rowIndex: 0,
     letterIndex: 0,
@@ -62,112 +65,24 @@ function Game() {
     guessedWord: false,
   });
 
-  // get the daily puzzle from backend
+  // backend calls
+  const { user, error: userError, isLoading: userIsLoading } = useUser();
   const {
     puzzle,
     error: puzzleError,
     isLoading: puzzleIsLoading,
   } = useDailyPuzzle();
-  const { user, error: userError, isLoading: userIsLoading } = useUser();
-  const correctWord = puzzle?.word.toUpperCase();
 
-  // TODO: submit the time spent on the game when timer is implemented in seconds.
+  // determine correct word
   useEffect(() => {
-    if (!gameOver.gameOver || !puzzle || !correctWord || !user) {
-      return;
+    if (user && puzzle) {
+      setCorrectWord(puzzle?.word.toUpperCase());
+    } else {
+      setCorrectWord(
+        words[Math.floor(Math.random() * words?.length)].toUpperCase()
+      );
     }
-
-    // check if the user has played the game today
-    if (!user?.pastGuesses[0]) {
-      // they have not played
-      const letterStates = board
-        .map((row) =>
-          row.map((letter, letterIndex) => {
-            // if true, the letter will be green
-            const correct = letter === correctWord[letterIndex];
-            // if true, the letter will be yellow
-            let close =
-              !correct && letter !== "" && correctWord.includes(letter);
-
-            // get the number of times letter shows up in guess.
-            const count = row.filter((l) => l === letter).length;
-
-            if (count > 1) {
-              // get the indices of all of the letters inside guess that are the same as letter
-              const guessIndices = row.reduce(
-                (acc, l, i) => (l === letter ? [...acc, i] : acc),
-                [] as number[]
-              );
-              // get the indices of all of the letters inside the correct word that are the same as letter
-              const correctIndices = correctWord
-                .split("")
-                .reduce(
-                  (acc, l, i) => (l === letter ? [...acc, i] : acc),
-                  [] as number[]
-                );
-
-              // check whether the current guess covers all of the correct indices
-              const coversAll = guessIndices.every((i) =>
-                correctIndices.includes(i)
-              );
-              if (coversAll) {
-                // check whether the current letter index is in the correct indices
-                if (!correctIndices.includes(letterIndex)) {
-                  close = false;
-                }
-              } else {
-                // get the number of yellow tiles that should appear (number of correct indices not covered by guess)
-                const numYellow = correctIndices.filter(
-                  (i) => !guessIndices.includes(i)
-                ).length;
-                // create a subset of the guess indices that includes only indices that are not found in the correct indices
-                const uncoveredIndices = guessIndices.filter(
-                  (i) => !correctIndices.includes(i)
-                );
-                // get the first numYellow indices from the uncovered indices
-                const yellowIndices = uncoveredIndices.slice(0, numYellow);
-                // if the current letter index is found in the yellow indices, set it to yellow
-                if (yellowIndices.includes(letterIndex)) {
-                  close = true;
-                } else {
-                  close = false;
-                }
-              }
-            }
-            return correct ? 2 : close ? 1 : 0;
-          })
-        )
-        .slice(0, currAttempt.rowIndex);
-      // send the results to backend
-      submitDailyPuzzleResult(letterStates, gameOver.guessedWord, 1);
-    }
-  }, [gameOver.gameOver]);
-
-  // TODO: change the buttons on the home screen
-  // check if the user is logged in
-  if (!user) {
-    return <h1>You must be logged in to play the game!</h1>;
-  }
-
-  // error check the loading of puzzle
-  if (puzzleError) {
-    return <div>{puzzleError}</div>;
-  } else if (puzzleIsLoading) {
-    return <div>Loading...</div>;
-  }
-
-  // error check the loading of user
-  if (userError) {
-    return <div>{userError}</div>;
-  } else if (userIsLoading) {
-    return <div>Loading...</div>;
-  }
-
-  // TODO: redirect to statistics page once merged.
-  // check if user has already played the game today
-  if (user?.pastGuesses[0]) {
-    return <div>You have already played today!</div>;
-  }
+  }, [puzzle, user]);
 
   // functions that interact with the game
   const onEnter = () => {
@@ -218,6 +133,102 @@ function Game() {
       letterIndex: currAttempt.letterIndex + 1,
     });
   };
+
+  // TODO: submit the time spent on the game when timer is implemented in seconds.
+  useEffect(() => {
+    if (!gameOver.gameOver || !puzzle || !correctWord || !user) {
+      return;
+    }
+
+    // logged in mode
+    // check if the user has played the game today
+    if (!user?.pastGuesses[0]) {
+      // they have not played
+      // TODO: stop the timer and store the seconds
+      // fill me in!
+      const letterStates = board
+        .map((row) =>
+          row.map((letter, letterIndex) => {
+            // if true, the letter will be green
+            const correct = letter === correctWord[letterIndex];
+            // if true, the letter will be yellow
+            let close =
+              !correct && letter !== "" && correctWord.includes(letter);
+
+            // get the number of times letter shows up in guess.
+            const count = row.filter((l) => l === letter)?.length;
+
+            if (count > 1) {
+              // get the indices of all of the letters inside guess that are the same as letter
+              const guessIndices = row.reduce(
+                (acc, l, i) => (l === letter ? [...acc, i] : acc),
+                [] as number[]
+              );
+              // get the indices of all of the letters inside the correct word that are the same as letter
+              const correctIndices = correctWord
+                .split("")
+                .reduce(
+                  (acc, l, i) => (l === letter ? [...acc, i] : acc),
+                  [] as number[]
+                );
+
+              // check whether the current guess covers all of the correct indices
+              const coversAll = guessIndices.every((i) =>
+                correctIndices.includes(i)
+              );
+              if (coversAll) {
+                // check whether the current letter index is in the correct indices
+                if (!correctIndices.includes(letterIndex)) {
+                  close = false;
+                }
+              } else {
+                // get the number of yellow tiles that should appear (number of correct indices not covered by guess)
+                const numYellow = correctIndices.filter(
+                  (i) => !guessIndices.includes(i)
+                ).length;
+                // create a subset of the guess indices that includes only indices that are not found in the correct indices
+                const uncoveredIndices = guessIndices.filter(
+                  (i) => !correctIndices.includes(i)
+                );
+                // get the first numYellow indices from the uncovered indices
+                const yellowIndices = uncoveredIndices.slice(0, numYellow);
+                // if the current letter index is found in the yellow indices, set it to yellow
+                if (yellowIndices.includes(letterIndex)) {
+                  close = true;
+                } else {
+                  close = false;
+                }
+              }
+            }
+            return correct ? 2 : close ? 1 : 0;
+          })
+        )
+        .slice(0, currAttempt.rowIndex);
+      // TODO: add the time spent on the game to the daily puzzle
+      // send the results to backend
+      submitDailyPuzzleResult(letterStates, gameOver.guessedWord, 1);
+    }
+  }, [gameOver.gameOver]);
+
+  // error check the loading of puzzle
+  if (user && puzzleError) {
+    return <div>You cannot play today&apos;s puzzle without logging in!</div>;
+  } else if (puzzleIsLoading) {
+    return <div>Puzzle is loading! Hang in there!</div>;
+  }
+
+  // error check the loading of user
+  if (user && userError) {
+    return <div>Error with user...</div>;
+  } else if (userIsLoading) {
+    return <div>User data is loading! Hang in there!</div>;
+  }
+
+  // TODO: redirect to statistics page once merged.
+  // check if user has already played the game today
+  if (user?.pastGuesses[0]) {
+    return <div>You have already played today!</div>;
+  }
 
   return (
     <div className="Game">

@@ -30,10 +30,10 @@ export default function Key({ value, disabled, correct, close }: Props) {
   };
 
   // Adjust disabled, correct, and close values
-  if (close) {
+  if (correct) {
     disabled = false;
-    correct = false;
-  } else if (correct) {
+    close = false;
+  } else if (close) {
     disabled = false;
   }
 

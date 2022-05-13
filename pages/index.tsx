@@ -2,41 +2,48 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { Button, Container, Image } from "react-bootstrap";
 import React from "react";
+import { login } from "../lib/hooks/auth";
+import { useUser } from "../lib/hooks/auth";
 
 const Home: NextPage = () => {
+  const { user } = useUser();
+
   return (
     <Container className="text-center">
       <Image
-        src="/blueno.png"
-        alt="Blueno logo"
-        width="300"
-        height="300"
-        className="d-inline-block align-top"
+        src="/wordify-logo.png"
+        alt="Wordify Logo"
+        fluid
+        className="d-inline-block align-top logo"
       />
-      <h1>Wordify</h1>
-      <Link href="/game">
-        <Button variant="light" size="lg">
-          Play As Guest
-        </Button>
-      </Link>
       <br />
-      <Link href="/dailyInfo">
-        <Button variant="light" size="lg">
-          Summary
-        </Button>
-      </Link>
       <br />
-      <Link href="/#">
-        <Button variant="light" size="lg">
+      {user ? (
+        <Link href="/game">
+          <Button variant="light" size="lg" className="homescreen-button">
+            Play!
+          </Button>
+        </Link>
+      ) : (
+        <Link href="/game">
+          <Button variant="light" size="lg" className="homescreen-button">
+            Play as Guest
+          </Button>
+        </Link>
+      )}
+      <br />
+      <br />
+      { user ? (
+        <Link href="/profile">
+          <Button variant="light" size="lg" className="homescreen-button">
+            Profile
+          </Button>
+        </Link>
+      ) : (
+        <Button variant="light" size="lg" onClick={login} className="homescreen-button">
           Log In
         </Button>
-      </Link>
-      <br />
-      <Link href="/profile">
-        <Button variant="light" size="lg">
-          Profile
-        </Button>
-      </Link>
+      )}
     </Container>
   );
 };

@@ -20,6 +20,12 @@ const Home: NextPage = () => {
         </Button>
       </Link>
       <br />
+      <Link href="/dailyInfo">
+        <Button variant="light" size="lg">
+          Summary
+        </Button>
+      </Link>
+      <br />
       <Link href="/#">
         <Button variant="light" size="lg">
           Log In

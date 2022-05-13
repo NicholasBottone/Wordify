@@ -133,6 +133,11 @@ nav h1 {
   cursor: pointer;
 }
 
+.progress-label {
+  float: left;
+  margin-right: 1em;
+}
+
 .enter {
   width: 80px;
   font-size: 18px;

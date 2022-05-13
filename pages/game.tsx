@@ -243,6 +243,7 @@ function Game() {
           }}
         >
           <Timer />
+          <br />
           <Board />
           <br />
           <br />

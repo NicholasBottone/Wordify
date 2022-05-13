@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { GameContext } from "../pages/game";
 
@@ -81,15 +82,7 @@ export default function Letter({ rowIndex, letterIndex }: Props) {
         setDisabledLetters!((prev: string[]) => [...prev, letter]);
       }
     }
-  }, [
-    currAttempt?.rowIndex,
-    close,
-    correct,
-    letter,
-    setCloseLetters,
-    setCorrectLetters,
-    setDisabledLetters,
-  ]);
+  }, [currAttempt?.rowIndex]);
 
   return (
     <div className="letter" id={letterState}>

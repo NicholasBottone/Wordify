@@ -11,34 +11,37 @@ const Home: NextPage = () => {
   return (
     <Container className="text-center">
       <Image
-        src="/blueno.png"
-        alt="Blueno logo"
-        width="300"
-        height="300"
-        className="d-inline-block align-top"
+        src="/wordify-logo.png"
+        alt="Wordify Logo"
+        fluid
+        className="d-inline-block align-top logo"
       />
-      <h1>Wordify</h1>
+      <br />
+      <br />
       {user ? (
         <Link href="/game">
-        <Button variant="light" size="lg">
-          Play!
-        </Button>
-      </Link>
+          <Button variant="light" size="lg" className="homescreen-button">
+            Play!
+          </Button>
+        </Link>
       ) : (
         <Link href="/game">
-        <Button variant="light" size="lg">
-          Play as Guest
-        </Button>
-      </Link>
+          <Button variant="light" size="lg" className="homescreen-button">
+            Play as Guest
+          </Button>
+        </Link>
       )}
       <br />
       <br />
       { user ? (
-        <br />
+        <Link href="/profile">
+          <Button variant="light" size="lg" className="homescreen-button">
+            Profile
+          </Button>
+        </Link>
       ) : (
-        <Button variant="light" size="lg" onClick={login}>
-          {" "}
-          Log In{" "}
+        <Button variant="light" size="lg" onClick={login} className="homescreen-button">
+          Log In
         </Button>
       )}
     </Container>

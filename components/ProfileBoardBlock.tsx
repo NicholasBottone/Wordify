@@ -1,9 +1,9 @@
 export default function ProfileBoardBlock(guess: number) {
   if (guess == 0) {
-    return <p>⬛️</p>;
+    return "⬛️";
   } else if (guess == 1) {
-    return <p>🟨</p>;
+    return "🟨";
   } else {
-    return <p>🟩</p>;
+    return "🟩";
   }
 }

@@ -3,21 +3,20 @@ import { Button, Container, Image } from "react-bootstrap";
 import Link from "next/link";
 import { FaExpand } from "react-icons/fa";
 import { useUser, login } from "../lib/hooks/auth";
+import Row from "../components/ProfileBoardRow"
 
 export default function Profile() {
   const { user } = useUser();
-<<<<<<< HEAD
   console.log(user);
   const todayGuess: any = user?.pastGuesses[0];
-  console.log(todayGuess);
+  // console.log(todayGuess[0]);
   // let { todayGuessOne }: any = Row(todayGuess[0]);
+  // console.log(todayGuessOne);
   // let { todayGuessTwo }: any = 0;
   // let { todayGuessThree }: any = 0;
   // let { todayGuessFour }: any = 0;
   // let { todayGuessFive }: any = 0;
   // let { todayGuessSix }: any = 0;
-=======
->>>>>>> ac77a1b53b3a53d3733c6743f73651490604bf9f
   if (user) {
     return (
       <div className="container">
@@ -64,8 +63,8 @@ export default function Profile() {
             <Container className="mt-5 d-grid gap-2"></Container>
             <h1> Board </h1>
             <h1 className="text-centered">
-              ⬜⬜⬜⬜⬜ <br />
-              ⬜⬜⬜⬜⬜ <br />
+              {/* {todayGuessOne} */}
+              {"⬜⬜⬜⬜⬜"} <br />
               ⬜⬜⬜⬜⬜ <br />
               ⬜⬜⬜⬜⬜ <br />
               ⬜⬜⬜⬜⬜ <br />

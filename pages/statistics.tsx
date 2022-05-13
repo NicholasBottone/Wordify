@@ -1,29 +1,26 @@
 import React from "react";
 import { Button, Container, ProgressBar, Image } from "react-bootstrap";
 import Link from "next/link";
-import { useUser } from "../lib/hooks/auth";
-import { FaExpand } from "react-icons/fa";
-import { login } from "../lib/hooks/auth";
+import { useUser, login } from "../lib/hooks/auth";
 
 export default function Profile() {
-  const { user, isLoading } = useUser();
-  console.log(user);
-  console.log(isLoading);
-  let { gamesWon }: any = 0;
-  let { gamesPlayed }: any = 0;
-  let { winPercentage }: any = 0;
-  let { winStreak }: any = 0;
-  let { maxStreak }: any = 0;
-  let { guessDistribution }: any = 0;
-  let { oneGuess }: any = 0;
-  let { twoGuesses }: any = 0;
-  let { threeGuesses }: any = 0;
-  let { fourGuesses }: any = 0;
-  let { fiveGuesses }: any = 0;
-  let { sixGuesses }: any = 0;
-  let { maxGuesses }: any = 0;
-  let { times }: any = 0;
-  let { averageTime }: any = parseInt("0");
+  const { user } = useUser();
+
+  let gamesWon = 0;
+  let gamesPlayed = 0;
+  let winPercentage = 0;
+  let winStreak = 0;
+  let maxStreak = 0;
+  let guessDistribution: number[] = [];
+  let oneGuess = 0;
+  let twoGuesses = 0;
+  let threeGuesses = 0;
+  let fourGuesses = 0;
+  let fiveGuesses = 0;
+  let sixGuesses = 0;
+  let maxGuesses = 0;
+  let times: (number | null)[] = [];
+  let averageTime = 0;
   if (user) {
     gamesWon = user?.gamesWon;
     gamesPlayed = user?.gamesPlayed;
@@ -41,26 +38,22 @@ export default function Profile() {
     times = user?.pastTimes;
     maxGuesses = Math.max.apply(null, guessDistribution);
 
-
-
-// for the calculation of average time.
-  if (times.length > 0) {
-  if (times[0]) {
-    averageTime = times[0];
-  }
-  for (var i = 1; i < times.length; i++) {
-    if (times[i]) {
-      averageTime = parseInt(averageTime) + parseInt(times[i]);
+    // for the calculation of average time.
+    if (times.length > 0) {
+      if (times[0]) {
+        averageTime = times[0];
+      }
+      for (let i = 1; i < times.length; i++) {
+        if (times[i]) {
+          averageTime = averageTime + (times[i] || 0);
+        }
+      }
+      averageTime =
+        averageTime == undefined ? 0 : Math.round(averageTime / times.length);
+    } else {
+      averageTime = 0;
     }
-  }
-  averageTime =
-    averageTime == undefined ? 0 : Math.round(averageTime / times.length);
 
-  } else {
-    averageTime = 0;
-  }
-
-  if (user) {
     return (
       <div className="container">
         <div className="row">
@@ -192,5 +185,4 @@ export default function Profile() {
       </Button>
     </Container>
   );
-}
 }

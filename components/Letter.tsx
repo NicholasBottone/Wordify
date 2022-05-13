@@ -39,10 +39,6 @@ export default function Letter({ rowIndex, letterIndex }: Props) {
         [] as number[]
       );
 
-    console.log("this letter index:", letterIndex);
-    console.log("guessIndices", guessIndices);
-    console.log("correctIndices", correctIndices);
-
     // check whether the current guess covers all of the correct indices
     const coversAll = guessIndices.every((i) => correctIndices.includes(i));
     if (coversAll) {

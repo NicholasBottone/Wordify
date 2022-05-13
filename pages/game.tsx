@@ -1,9 +1,16 @@
 import Board from "../components/Board";
 import Keyboard from "../components/Keyboard";
-import { createContext, useState, Dispatch, SetStateAction } from "react";
-import GameOver from "../components/GameOver";
-import { useDailyPuzzle } from "../lib/hooks/puzzle";
+import {
+  createContext,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
+import GameOver, { SendResults } from "../components/GameOver";
+import { useDailyPuzzle, submitDailyPuzzleResult } from "../lib/hooks/puzzle";
 import WordVerifier from "../lib/wordVerifier/WordVerifier";
+import { useUser } from "../lib/hooks/auth";
 
 interface IContext {
   board: string[][];
@@ -55,13 +62,68 @@ function Game() {
   });
 
   // get the daily puzzle from backend
-  const { puzzle, error, isLoading } = useDailyPuzzle();
-  if (error) {
-    return <div>{error}</div>;
-  } else if (isLoading) {
+  const {
+    puzzle,
+    error: puzzleError,
+    isLoading: puzzleIsLoading,
+  } = useDailyPuzzle();
+  const { user, error: userError, isLoading: userIsLoading } = useUser();
+  const correctWord = puzzle?.word.toUpperCase();
+
+  // TODO: submit the time spent on the game when timer is implemented in seconds.
+  useEffect(() => {
+    if (!gameOver.gameOver || !puzzle || !correctWord || !user) {
+      return;
+    }
+
+    // check if the user has played the game today
+    if (user?.pastGuesses[0]) {
+      // they have played
+      console.log("already played");
+    } else {
+      // they have not played
+      console.log("Submitting backend result");
+      const letterStates = board
+        .map((row) =>
+          row.map((letter, letterIndex) => {
+            const correct = letter === correctWord[letterIndex];
+            const close =
+              !correct && letter !== "" && correctWord.includes(letter);
+            return correct ? 2 : close ? 1 : 0;
+          })
+        )
+        .slice(0, currAttempt.rowIndex);
+
+      // send the results to backend
+      submitDailyPuzzleResult(letterStates, gameOver.guessedWord, 1);
+      SendResults({ board, gameOver, currAttempt, correctWord });
+    }
+  }, [gameOver.gameOver]);
+
+  // check if the user is logged in
+  if (!user) {
+    return <h1>You must be logged in to play the game!</h1>;
+  }
+
+  // error check the loading of puzzle
+  if (puzzleError) {
+    return <div>{puzzleError}</div>;
+  } else if (puzzleIsLoading) {
     return <div>Loading...</div>;
   }
-  const correctWord = puzzle?.word.toUpperCase();
+
+  // error check the loading of user
+  if (userError) {
+    return <div>{userError}</div>;
+  } else if (userIsLoading) {
+    return <div>Loading...</div>;
+  }
+
+  // TODO: redirect to statistics page once merged.
+  // check if user has already played the game today
+  if (user?.pastGuesses[0]) {
+    return <div>You have already played today!</div>;
+  }
 
   // functions that interact with the game
   const onEnter = () => {

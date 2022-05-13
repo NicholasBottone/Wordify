@@ -88,10 +88,10 @@ handler.post(async (req, res) => {
   // Update guess distribution
   const numberOfGuesses = resultBoard.length;
   const userGuessDistribution = user.guessDistribution;
-  if (win) userGuessDistribution[numberOfGuesses]++;
+  if (win) userGuessDistribution[numberOfGuesses - 1]++;
 
   const puzzleGuessDistribution = puzzle.guessDistribution;
-  if (win) puzzleGuessDistribution[numberOfGuesses]++;
+  if (win) puzzleGuessDistribution[numberOfGuesses - 1]++;
 
   // Update the user's profile with the result
   await User.updateOne(

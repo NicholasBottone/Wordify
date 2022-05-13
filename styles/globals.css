@@ -8,12 +8,24 @@ table {
 }
 
 body {
-  /*background: #C8B4CF;*/
+  /* background: #c8b4cf; */
   background: #ede6ed;
+  /* background: #bfb2c4; */
 }
 
-.button {
+.logo {
+  /* move the logo lower on the screen */
+  margin-top: 5%;
+}
+
+.homescreen-title {
+}
+.homescreen-button {
   background-color: #a577a3;
+  color: #fff;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 3px;
 }
 
 th {

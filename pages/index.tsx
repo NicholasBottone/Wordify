@@ -7,27 +7,27 @@ const Home: NextPage = () => {
   return (
     <Container className="text-center">
       <Image
-        src="/blueno.png"
-        alt="Blueno logo"
-        width="300"
-        height="300"
-        className="d-inline-block align-top"
+        src="/wordify-logo.png"
+        alt="Wordify Logo"
+        fluid
+        className="d-inline-block align-top logo"
       />
-      <h1>Wordify</h1>
+      <br />
+      <br />
       <Link href="/game">
-        <Button variant="light" size="lg">
+        <Button variant="light" size="lg" className="homescreen-button">
           Play As Guest
         </Button>
       </Link>
       <br />
       <Link href="/#">
-        <Button variant="light" size="lg">
+        <Button variant="light" size="lg" className="homescreen-button">
           Log In
         </Button>
       </Link>
       <br />
       <Link href="/profile">
-        <Button variant="light" size="lg">
+        <Button variant="light" size="lg" className="homescreen-button">
           Profile
         </Button>
       </Link>

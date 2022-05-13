@@ -11,7 +11,6 @@ import GameOver from "../components/GameOver";
 import { useDailyPuzzle, submitDailyPuzzleResult } from "../lib/hooks/puzzle";
 import { useUser } from "../lib/hooks/auth";
 import WordVerifier from "../lib/words/wordVerifier";
-import Timer from "../components/Timer";
 
 interface IContext {
   board: string[][];
@@ -39,6 +38,7 @@ interface IContext {
 }
 
 export const GameContext = createContext<Partial<IContext>>({});
+let continueTimer = true;
 
 function Game() {
   const boardDefault = [
@@ -62,6 +62,17 @@ function Game() {
     guessedWord: false,
   });
 
+  // Game timer
+  let [timer, setTimer] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (continueTimer) {
+        setTimer((timer += 1));
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   // get the daily puzzle from backend
   const {
     puzzle,
@@ -80,8 +91,9 @@ function Game() {
     // check if the user has played the game today
     if (!user?.pastGuesses[0]) {
       // they have not played
-      // TODO: stop the timer and store the seconds
-      // fill me in!
+      // stop the timer and store the seconds
+      continueTimer = false;
+      console.log("Final time: ", timer);
       const letterStates = board
         .map((row) =>
           row.map((letter, letterIndex) => {
@@ -142,7 +154,7 @@ function Game() {
         .slice(0, currAttempt.rowIndex);
       // TODO: add the time spent on the game to the daily puzzle
       // send the results to backend
-      submitDailyPuzzleResult(letterStates, gameOver.guessedWord, 1);
+      submitDailyPuzzleResult(letterStates, gameOver.guessedWord, timer);
     }
   }, [gameOver.gameOver]);
 
@@ -245,7 +257,7 @@ function Game() {
             setGameOver,
           }}
         >
-          <Timer />
+          <div className="timer">{timer}</div>
           <br />
           <Board />
           <br />

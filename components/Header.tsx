@@ -40,9 +40,9 @@ export default function Header() {
                   Stats
                 </Nav.Link>
               </Link>
-              <Link href="/about">
-                <Nav.Link as="a" href="/about">
-                  About
+              <Link href="/privacy">
+                <Nav.Link as="a" href="/privacy">
+                  Privacy Policy
                 </Nav.Link>
               </Link>
             </Nav>

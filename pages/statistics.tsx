@@ -41,6 +41,7 @@ export default function Profile() {
     times = user?.pastTimes;
     maxGuesses = Math.max.apply(null, guessDistribution);
 
+<<<<<<< HEAD
     // for the calculation of average time.
     if (times.length > 0) {
       if (times[0]) {
@@ -55,6 +56,21 @@ export default function Profile() {
       averageTime =
         averageTime == undefined ? 0 : Math.round(averageTime / times.length);
     }
+=======
+
+// for the calculation of average time.
+  if (times.length > 0) {
+  if (times[0]) {
+    averageTime = times[0];
+  }
+  for (var i = 1; i < times.length; i++) {
+    if (times[i]) {
+      averageTime = parseInt(averageTime) + parseInt(times[i]);
+    }
+  }
+  averageTime =
+    averageTime == undefined ? 0 : Math.round(averageTime / times.length);
+>>>>>>> 7cce4221838f80d41c2bf9e07b6ef991bbfea647
   } else {
     averageTime = 0;
   }

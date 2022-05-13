@@ -6,6 +6,7 @@ import { useUser, login } from "../lib/hooks/auth";
 
 export default function Profile() {
   const { user } = useUser();
+<<<<<<< HEAD
   let todaysGuess: any = 0;
   let board: any;
   if (user) {
@@ -42,6 +43,20 @@ export default function Profile() {
     );
   }
 
+=======
+<<<<<<< HEAD
+  console.log(user);
+  const todayGuess: any = user?.pastGuesses[0];
+  console.log(todayGuess);
+  // let { todayGuessOne }: any = Row(todayGuess[0]);
+  // let { todayGuessTwo }: any = 0;
+  // let { todayGuessThree }: any = 0;
+  // let { todayGuessFour }: any = 0;
+  // let { todayGuessFive }: any = 0;
+  // let { todayGuessSix }: any = 0;
+=======
+>>>>>>> ac77a1b53b3a53d3733c6743f73651490604bf9f
+>>>>>>> 7cce4221838f80d41c2bf9e07b6ef991bbfea647
   if (user) {
     return (
       <div className="container">

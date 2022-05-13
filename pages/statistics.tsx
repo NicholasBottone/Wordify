@@ -41,19 +41,20 @@ export default function Profile() {
     maxGuesses = Math.max.apply(null, guessDistribution);
 
 
-    // for the calculation of average time.
-
-    if (times.length > 0) {
-      if (times[0]) {
-        averageTime = times[0];
-      }
-    }
-    for (var i = 1; i < times.length; i++) {
-      if (times[i]) {
-        averageTime = parseInt(averageTime) + parseInt(times[i]);
-      }
+// for the calculation of average time.
+  if (times.length > 0) {
+  if (times[0]) {
+    averageTime = times[0];
   }
-    averageTime = Math.round(averageTime / times.length);
+  for (var i = 1; i < times.length; i++) {
+    if (times[i]) {
+      averageTime = parseInt(averageTime) + parseInt(times[i]);
+    }
+  }
+  averageTime =
+    averageTime == undefined ? 0 : Math.round(averageTime / times.length);
+  } else {
+    averageTime = 0;
   }
 
   if (user) {

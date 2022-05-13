@@ -10,9 +10,9 @@ import { getImageSize } from "next/dist/server/image-optimizer";
 
 export default function Profile() {
   const { user } = useUser();
-  // console.log(user);
-  // const todayGuess: [Number, Number, Number, Number, Number] = user?.pastGuesses[user?.pastGuesses.length - 1];
-  // console.log(todayGuess);
+  console.log(user);
+  const todayGuess: any = user?.pastGuesses[0];
+  console.log(todayGuess);
   // let { todayGuessOne }: any = Row(todayGuess[0]);
   // let { todayGuessTwo }: any = 0;
   // let { todayGuessThree }: any = 0;

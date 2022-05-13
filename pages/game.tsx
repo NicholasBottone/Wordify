@@ -11,6 +11,7 @@ import GameOver from "../components/GameOver";
 import { useDailyPuzzle, submitDailyPuzzleResult } from "../lib/hooks/puzzle";
 import { useUser } from "../lib/hooks/auth";
 import WordVerifier from "../lib/words/wordVerifier";
+import Timer from "../components/Timer";
 
 interface IContext {
   board: string[][];
@@ -241,7 +242,10 @@ function Game() {
             setGameOver,
           }}
         >
+          <Timer />
           <Board />
+          <br />
+          <br />
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </GameContext.Provider>
       </div>

@@ -1,9 +1,9 @@
 import Board from "../components/Board";
 import Keyboard from "../components/Keyboard";
 import { createContext, useState, Dispatch, SetStateAction } from "react";
-import { words } from "../components/words";
 import GameOver from "../components/GameOver";
 import { useDailyPuzzle } from "../lib/hooks/puzzle";
+import WordVerifier from "../lib/wordVerifier/WordVerifier";
 
 interface IContext {
   board: string[][];
@@ -71,7 +71,7 @@ function Game() {
     const entry = board[currAttempt.rowIndex].join("").toLowerCase();
 
     // check if we should move onto the next row -> only if the word is a valid word
-    if (words.includes(entry)) {
+    if (WordVerifier(entry)) {
       setCurrAttempt({
         rowIndex: currAttempt.rowIndex + 1,
         letterIndex: 0,

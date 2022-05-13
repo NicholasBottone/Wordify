@@ -82,19 +82,68 @@ function Game() {
       const letterStates = board
         .map((row) =>
           row.map((letter, letterIndex) => {
+            // if true, the letter will be green
             const correct = letter === correctWord[letterIndex];
-            const close =
+            // if true, the letter will be yellow
+            var close =
               !correct && letter !== "" && correctWord.includes(letter);
+
+            // get the number of times letter shows up in guess.
+            const count = row.filter((l) => l === letter).length;
+
+            if (count > 1) {
+              // get the indices of all of the letters inside guess that are the same as letter
+              const guessIndices = row.reduce(
+                (acc, l, i) => (l === letter ? [...acc, i] : acc),
+                [] as number[]
+              );
+              // get the indices of all of the letters inside the correct word that are the same as letter
+              var correctIndices = correctWord
+                .split("")
+                .reduce(
+                  (acc, l, i) => (l === letter ? [...acc, i] : acc),
+                  [] as number[]
+                );
+
+              // check whether the current guess covers all of the correct indices
+              const coversAll = guessIndices.every((i) =>
+                correctIndices.includes(i)
+              );
+              if (coversAll) {
+                // check whether the current letter index is in the correct indices
+                if (!correctIndices.includes(letterIndex)) {
+                  close = false;
+                }
+              } else {
+                // get the number of yellow tiles that should appear (number of correct indices not covered by guess)
+                const numYellow = correctIndices.filter(
+                  (i) => !guessIndices.includes(i)
+                ).length;
+                // create a subset of the guess indices that includes only indices that are not found in the correct indices
+                const uncoveredIndices = guessIndices.filter(
+                  (i) => !correctIndices.includes(i)
+                );
+                // get the first numYellow indices from the uncovered indices
+                const yellowIndices = uncoveredIndices.slice(0, numYellow);
+                // if the current letter index is found in the yellow indices, set it to yellow
+                if (yellowIndices.includes(letterIndex)) {
+                  close = true;
+                } else {
+                  close = false;
+                }
+              }
+            }
             return correct ? 2 : close ? 1 : 0;
           })
         )
         .slice(0, currAttempt.rowIndex);
-
+      console.log(letterStates);
       // send the results to backend
       submitDailyPuzzleResult(letterStates, gameOver.guessedWord, 1);
     }
   }, [gameOver.gameOver]);
 
+  // TODO: change the buttons on the home screen
   // check if the user is logged in
   if (!user) {
     return <h1>You must be logged in to play the game!</h1>;

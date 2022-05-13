@@ -83,13 +83,6 @@ export default function Profile() {
               {user?.givenName} {user?.familyName}
             </h4>
             {user?.bio}
-            <br />
-            <br />
-            <Link href="/game">
-              <Button variant="secondary" size="lg" className="">
-                Real Word of the Day <FaExpand />
-              </Button>
-            </Link>{" "}
           </div>
           <div className="col-sm-6">
             <Container className="mt-5">

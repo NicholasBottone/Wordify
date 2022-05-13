@@ -32,3 +32,19 @@ export async function setFriend(id: string, friend: boolean) {
   });
   mutate("/api/user");
 }
+
+/**
+ * Searches for the top 10 users whose name contains the given query string
+ * @param query partial name to be queried (must be at least 2 characters long)
+ * @returns list of up to 10 users that have the given string in their name
+ */
+export async function searchProfiles(query: string) {
+  const response = await fetch(`/api/user/search?q=${query}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (response.status !== 200) {
+    throw new Error(await response.text());
+  }
+  return response.json();
+}

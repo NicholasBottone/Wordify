@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GameContext } from "../pages/game";
+import { submitDailyPuzzleResult } from "../lib/hooks/puzzle";
 
 export default function GameOver() {
   const { gameOver, currAttempt, correctWord } = useContext(GameContext);

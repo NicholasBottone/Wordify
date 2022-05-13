@@ -28,6 +28,15 @@ export default function Key({ value, disabled, correct, close }: Props) {
       onLetter!(value);
     }
   };
+
+  // Adjust disabled, correct, and close values
+  if (correct) {
+    disabled = false;
+    close = false;
+  } else if (close) {
+    disabled = false;
+  }
+
   return (
     <div
       className={className}

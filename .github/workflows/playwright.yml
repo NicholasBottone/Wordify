@@ -1,0 +1,35 @@
+# ESLint and Playwright workflow for GitHub Actions
+name: "🧪 Run Tests"
+on: push
+jobs:
+  test:
+    name: "Lint and test 🤓"
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+      - name: Install dependencies
+        run: npm ci
+      - name: Run linter
+        run: npm run lint
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+      - name: Run Playwright tests
+        run: npm test
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
+          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          TEST_2FA: ${{ secrets.TEST_2FA }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          CRON_API_KEY: ${{ secrets.CRON_API_KEY }}
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

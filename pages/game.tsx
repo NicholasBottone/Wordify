@@ -80,6 +80,8 @@ function Game() {
     // check if the user has played the game today
     if (!user?.pastGuesses[0]) {
       // they have not played
+      // TODO: stop the timer and store the seconds
+      // fill me in!
       const letterStates = board
         .map((row) =>
           row.map((letter, letterIndex) => {
@@ -138,6 +140,7 @@ function Game() {
           })
         )
         .slice(0, currAttempt.rowIndex);
+      // TODO: add the time spent on the game to the daily puzzle
       // send the results to backend
       submitDailyPuzzleResult(letterStates, gameOver.guessedWord, 1);
     }

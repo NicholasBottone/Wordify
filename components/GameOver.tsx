@@ -1,9 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { Button } from "react-bootstrap";
+import { useUser } from "../lib/hooks/auth";
 import { GameContext } from "../pages/game";
-import { submitDailyPuzzleResult } from "../lib/hooks/puzzle";
 
 export default function GameOver() {
   const { gameOver, currAttempt, correctWord } = useContext(GameContext);
+  const { user } = useUser();
+  const router = useRouter();
   return (
     <div className="gameOver">
       <h3>
@@ -15,6 +19,15 @@ export default function GameOver() {
       <h1>
         Attempt: {gameOver!.guessedWord ? currAttempt!.rowIndex : "X"} / 6
       </h1>
+      <div>
+        {!user ? (
+          <Button variant="light" onClick={() => router.reload()}>
+            Get a new word!
+          </Button>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }

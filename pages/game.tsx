@@ -1,5 +1,6 @@
 import Board from "../components/Board";
 import Keyboard from "../components/Keyboard";
+import { Container } from "react-bootstrap";
 import {
   createContext,
   useState,
@@ -241,7 +242,38 @@ function Game() {
   // TODO: redirect to statistics page once merged.
   // check if user has already played the game today
   if (user?.pastGuesses[0]) {
-    return <div>You have already played today!</div>;
+    const resultBoard = (
+      <div>
+        {user.pastGuesses[0].map((row: any, idx: number) => {
+          return (
+            <div key={idx}>
+              <h1>
+                {" "}
+                {row.map((cell: any) => {
+                  if (cell == 2) {
+                    return "🟩";
+                  } else if (cell == 1) {
+                    return "🟨";
+                  } else {
+                    return "⬛️";
+                  }
+                })}
+              </h1>
+            </div>
+          );
+        })}
+        {/* fill with gray squares for unused rows */}
+      </div>
+    );
+
+    return (
+      <div>
+        <div className="text-centered">
+          You have already played today!
+          <div> Your daily Wordify board!{resultBoard}</div>
+        </div>
+      </div>
+    );
   }
 
   return (

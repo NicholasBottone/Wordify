@@ -78,7 +78,6 @@ export default function Profile() {
             <Container className="mt-5 d-grid gap-2">
               <div className="col-sm-6 text-center">
                 <h2> Today&apos;s Board </h2>
-
                 <h1 className="text-centered"></h1>
                 {board}
               </div>

@@ -13,8 +13,8 @@ export default function Header() {
           <Link href="/">
             <Navbar.Brand as="a" href="/">
               <Image
-                src="/blueno.png"
-                alt="Blueno logo"
+                src="/icon.png"
+                alt="wordify icon"
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
@@ -28,6 +28,16 @@ export default function Header() {
               <Link href="/">
                 <Nav.Link as="a" href="/">
                   Home
+                </Nav.Link>
+              </Link>
+              <Link href="/game">
+                <Nav.Link as="a" href="/game">
+                  Play
+                </Nav.Link>
+              </Link>
+              <Link href="/daily-info">
+                <Nav.Link as="a" href="/daily-info">
+                  Stats
                 </Nav.Link>
               </Link>
               <Link href="/about">

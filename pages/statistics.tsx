@@ -27,7 +27,8 @@ export default function Profile() {
   if (user) {
     gamesWon = user?.gamesWon;
     gamesPlayed = user?.gamesPlayed;
-    winPercentage = gamesPlayed != 0 ? Math.round((gamesWon / gamesPlayed) * 100) : 0;
+    winPercentage =
+      gamesPlayed != 0 ? Math.round((gamesWon / gamesPlayed) * 100) : 0;
     winStreak = user?.winStreak;
     maxStreak = user?.longestWinStreak;
     guessDistribution = user?.guessDistribution;
@@ -39,6 +40,7 @@ export default function Profile() {
     sixGuesses = guessDistribution[5];
     times = user?.pastTimes;
     maxGuesses = Math.max.apply(null, guessDistribution);
+
 
 
 // for the calculation of average time.
@@ -53,6 +55,7 @@ export default function Profile() {
   }
   averageTime =
     averageTime == undefined ? 0 : Math.round(averageTime / times.length);
+
   } else {
     averageTime = 0;
   }
@@ -129,47 +132,55 @@ export default function Profile() {
             </Container>
             <Container className="mt-5 d-grid gap-2">
               <h1> Guess Distribution </h1>
-              <p><h6 className="progress-label">1</h6>
-              <ProgressBar
-                now={oneGuess == 0 ? 0 : 100 / (maxGuesses / oneGuess)}
-                label= {oneGuess}
-                variant="success"
-              />
+              <p>
+                <h6 className="progress-label">1</h6>
+                <ProgressBar
+                  now={oneGuess == 0 ? 0 : 100 / (maxGuesses / oneGuess)}
+                  label={oneGuess}
+                  variant="success"
+                />
               </p>
-              <p><h6 className="progress-label">2</h6>
-              <ProgressBar
-                now={twoGuesses == 0 ? 0 : 100 / (maxGuesses / twoGuesses)}
-                label={twoGuesses}
-                variant="success"
-              />
+              <p>
+                <h6 className="progress-label">2</h6>
+                <ProgressBar
+                  now={twoGuesses == 0 ? 0 : 100 / (maxGuesses / twoGuesses)}
+                  label={twoGuesses}
+                  variant="success"
+                />
               </p>
-              <p><h6 className="progress-label">3</h6>
-              <ProgressBar
-                now={threeGuesses == 0 ? 0 : 100 / (maxGuesses / threeGuesses)}
-                label={threeGuesses}
-                variant="success"
-              />
+              <p>
+                <h6 className="progress-label">3</h6>
+                <ProgressBar
+                  now={
+                    threeGuesses == 0 ? 0 : 100 / (maxGuesses / threeGuesses)
+                  }
+                  label={threeGuesses}
+                  variant="success"
+                />
               </p>
-              <p><h6 className="progress-label">4</h6>
-              <ProgressBar
-                now={fourGuesses == 0 ? 0 : 100 / (maxGuesses / fourGuesses)}
-                label={fourGuesses}
-                variant="success"
-              />
+              <p>
+                <h6 className="progress-label">4</h6>
+                <ProgressBar
+                  now={fourGuesses == 0 ? 0 : 100 / (maxGuesses / fourGuesses)}
+                  label={fourGuesses}
+                  variant="success"
+                />
               </p>
-              <p><h6 className="progress-label">5</h6>
-              <ProgressBar
-                now={fiveGuesses == 0 ? 0 : 100 / (maxGuesses / fiveGuesses)}
-                label={fiveGuesses}
-                variant="success"
-              />
+              <p>
+                <h6 className="progress-label">5</h6>
+                <ProgressBar
+                  now={fiveGuesses == 0 ? 0 : 100 / (maxGuesses / fiveGuesses)}
+                  label={fiveGuesses}
+                  variant="success"
+                />
               </p>
-              <p><h6 className="progress-label">6</h6>
-              <ProgressBar
-                now={sixGuesses == 0 ? 0 : 100 / (maxGuesses / sixGuesses)}
-                label={sixGuesses}
-                variant="success"
-              />
+              <p>
+                <h6 className="progress-label">6</h6>
+                <ProgressBar
+                  now={sixGuesses == 0 ? 0 : 100 / (maxGuesses / sixGuesses)}
+                  label={sixGuesses}
+                  variant="success"
+                />
               </p>
             </Container>
           </div>
@@ -182,10 +193,11 @@ export default function Profile() {
       <br />
       <h4> Log in to access the statistics page!</h4>
       <br />
-    <Button variant="light" size="lg" onClick={login}>
-    {" "}
-    Log In{" "}
-  </Button>
-  </Container>
-  )
+      <Button variant="light" size="lg" onClick={login}>
+        {" "}
+        Log In{" "}
+      </Button>
+    </Container>
+  );
+}
 }

@@ -7,16 +7,41 @@ import Row from "../components/ProfileBoardRow"
 
 export default function Profile() {
   const { user } = useUser();
-  console.log(user);
-  const todayGuess: any = user?.pastGuesses[0];
-  // console.log(todayGuess[0]);
-  // let { todayGuessOne }: any = Row(todayGuess[0]);
-  // console.log(todayGuessOne);
-  // let { todayGuessTwo }: any = 0;
-  // let { todayGuessThree }: any = 0;
-  // let { todayGuessFour }: any = 0;
-  // let { todayGuessFive }: any = 0;
-  // let { todayGuessSix }: any = 0;
+  let todaysGuess: any = 0;
+  let board: any;
+  if (user) {
+    todaysGuess = user?.pastGuesses[0];
+  }
+  if (!todaysGuess) {
+    board = <h4> You have not played today's word </h4>;
+  } else {
+    // map used rows to appropriate squares
+    board = (
+      <div>
+        {todaysGuess.map((row: any) => {
+          return (
+            <div>
+              
+              <h1>
+                {" "}
+                {row.map((cell: any) => {
+                  if (cell == 2) {
+                    return "🟩";
+                  } else if (cell == 1) {
+                    return "🟨";
+                  } else {
+                    return "⬛️";
+                  }
+                })}
+              </h1>
+            </div>
+          );
+        })}
+        {/* fill with gray squares for unused rows */}
+      </div>
+    );
+  }
+
   if (user) {
     return (
       <div className="container">
@@ -60,15 +85,15 @@ export default function Profile() {
                 </Button>
               </Link>
             </Container>
-            <Container className="mt-5 d-grid gap-2"></Container>
-            <h1> Board </h1>
-            <h1 className="text-centered">
-              {/* {todayGuessOne} */}
-              {"⬜⬜⬜⬜⬜"} <br />
-              ⬜⬜⬜⬜⬜ <br />
-              ⬜⬜⬜⬜⬜ <br />
-              ⬜⬜⬜⬜⬜ <br />
-            </h1>
+            <Container className="mt-5 d-grid gap-2">
+              <div className="col-sm-6 text-center">
+              <h2> Today's Board </h2>
+
+              <h1 className="text-centered"></h1>
+              {board}
+              </div>
+            </Container>
+            
           </div>
         </div>
       </div>

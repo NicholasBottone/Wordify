@@ -85,7 +85,7 @@ function Game() {
             // if true, the letter will be green
             const correct = letter === correctWord[letterIndex];
             // if true, the letter will be yellow
-            var close =
+            let close =
               !correct && letter !== "" && correctWord.includes(letter);
 
             // get the number of times letter shows up in guess.
@@ -98,7 +98,7 @@ function Game() {
                 [] as number[]
               );
               // get the indices of all of the letters inside the correct word that are the same as letter
-              var correctIndices = correctWord
+              const correctIndices = correctWord
                 .split("")
                 .reduce(
                   (acc, l, i) => (l === letter ? [...acc, i] : acc),

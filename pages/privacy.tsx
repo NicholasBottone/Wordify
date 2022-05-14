@@ -6,14 +6,14 @@ export default function Privacy() {
     <Container className="pt-5">
       <h1 className="text-center">Wordify Privacy Policy</h1>
       <br />
-      <p>
+      <p className="fs-5">
         Wordify is committed to privacy. We will never sell your personal
         information to anyone. We only collect basic information and statistics
         about your game play and your usage of the game, such as your win count
         and win streak. We do not track your IP address or use targeted
         advertising.
       </p>
-      <p>
+      <p className="fs-5">
         For user account registration and authentication, we make use of Google
         OAuth2. When you choose to login to an account, we store a cookie with a
         user session id that allows us to keep you signed-in to your account
@@ -24,10 +24,11 @@ export default function Privacy() {
         information from Google, such as passwords. For more information
         regarding how Google handles your information, please visit{" "}
         <a href="https://policies.google.com/privacy">
-          Google&apos;s Privacy Policy.
+          Google&apos;s Privacy Policy
         </a>
+        .
       </p>
-      <p>
+      <p className="fs-5">
         For web and mobile analytics, we make use of Vercel Analytics. Vercel
         Analytics is a service provided by Vercel that allows us to collect
         performance data about how the web app is performing on user devices.
@@ -35,16 +36,18 @@ export default function Privacy() {
         and is used to help us improve the web app. For more information about
         how Vercel handles your information, please visit{" "}
         <a href="https://vercel.com/legal/privacy-policy">
-          Vercel&apos;s Privacy Policy.
+          Vercel&apos;s Privacy Policy
         </a>
+        .
       </p>
-      <p>
+      <p className="fs-5">
         As part of our commitment to privacy and the open source community, the
         codebase of Wordify is open source and licensed under the AGPL-3.0
         license. To visit the codebase, please visit{" "}
         <a href="https://github.com/NicholasBottone/Wordify">
-          GitHub.com/NicholasBottone/Wordify
+          our repository on GitHub
         </a>
+        .
       </p>
     </Container>
   );

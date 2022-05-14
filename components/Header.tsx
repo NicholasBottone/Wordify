@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Navbar, Container, Nav, Image, NavDropdown } from "react-bootstrap";
 import { login, logout, useUser } from "../lib/hooks/auth";
+import { FaGithub } from "react-icons/fa";
 
 export default function Header() {
   const { user } = useUser();
@@ -37,7 +38,12 @@ export default function Header() {
               </Link>
               <Link href="/daily-info">
                 <Nav.Link as="a" href="/daily-info">
-                  Stats
+                  Today&apos;s Stats
+                </Nav.Link>
+              </Link>
+              <Link href="/search">
+                <Nav.Link as="a" href="/search">
+                  Search for Friends
                 </Nav.Link>
               </Link>
               <Link href="/about">
@@ -50,6 +56,9 @@ export default function Header() {
                   Privacy Policy
                 </Nav.Link>
               </Link>
+              <Nav.Link href="https://github.com/NicholasBottone/Wordify">
+                <FaGithub />
+              </Nav.Link>
             </Nav>
             <Nav className="justify-content-end">
               {user ? (

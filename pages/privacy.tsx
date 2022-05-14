@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 
 export default function Privacy() {
   return (
-    <Container className="py-5">
+    <Container className="pt-5">
       <h1 className="text-center">Wordify Privacy Policy</h1>
       <br />
       <p>

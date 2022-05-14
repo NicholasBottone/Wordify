@@ -1,6 +1,5 @@
 import Board from "../components/Board";
 import Keyboard from "../components/Keyboard";
-import { Container } from "react-bootstrap";
 import {
   createContext,
   useState,
@@ -13,7 +12,6 @@ import { useDailyPuzzle, submitDailyPuzzleResult } from "../lib/hooks/puzzle";
 import { useUser } from "../lib/hooks/auth";
 import WordVerifier from "../lib/words/wordVerifier";
 import { words } from "../lib/words/words";
-import IDailyPuzzle from "../types/IDailyPuzzle";
 
 interface IContext {
   board: string[][];
@@ -79,7 +77,7 @@ function Game() {
 
   // backend calls
   const { user, error: userError, isLoading: userIsLoading } = useUser();
-  
+
   // get the daily puzzle from backend
   const {
     puzzle,

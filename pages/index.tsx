@@ -2,8 +2,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { Button, Container, Image } from "react-bootstrap";
 import React from "react";
-import { login } from "../lib/hooks/auth";
-import { useUser } from "../lib/hooks/auth";
+import { login, useUser } from "../lib/hooks/auth";
 
 const Home: NextPage = () => {
   const { user } = useUser();

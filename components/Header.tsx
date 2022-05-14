@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header>
-      <Navbar bg="light" variant="light">
+      <Navbar bg="light" variant="light" expand="lg">
         <Container>
           <Link href="/">
             <Navbar.Brand as="a" href="/">
@@ -23,8 +23,8 @@ export default function Header() {
               Wordify
             </Navbar.Brand>
           </Link>
-          <Navbar.Toggle />
-          <Navbar.Collapse>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Link href="/">
                 <Nav.Link as="a" href="/">
@@ -81,6 +81,12 @@ export default function Header() {
                       Profile
                     </NavDropdown.Item>
                   </Link>
+                  <Link href="/friends">
+                    <NavDropdown.Item as="a" href="/friends">
+                      Friends
+                    </NavDropdown.Item>
+                  </Link>
+                  <NavDropdown.Divider />
                   <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                 </NavDropdown>
               ) : (

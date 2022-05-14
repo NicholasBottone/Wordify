@@ -1,22 +1,12 @@
 import React from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import { useDebouncedCallback } from "use-debounce";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { useUser } from "../lib/hooks/auth";
-import { searchProfiles, setFriend } from "../lib/hooks/profile";
+import { useFriends } from "../lib/hooks/profile";
 import IUser from "../types/IUser";
 
 export default function Search() {
   const { user } = useUser();
-
-  const [queriedProfiles, setQueriedProfiles] = React.useState<IUser[]>([]);
-
-  const debounced = useDebouncedCallback((value: string) => {
-    if (value.length >= 2) {
-      searchProfiles(value).then((profiles: IUser[]) => {
-        setQueriedProfiles(profiles);
-      });
-    }
-  }, 500);
+  const { friends } = useFriends();
 
   if (!user) {
     return (
@@ -26,20 +16,25 @@ export default function Search() {
     );
   }
 
+  if (!friends) {
+    return (
+      <Container className="text-center mt-5">
+        <h1>Loading...</h1>
+      </Container>
+    );
+  }
+
   return (
     <Container className="text-center mt-5">
-      <h1>Search for Friends</h1>
+      <h1>Friends</h1>
       <br />
-      <h4>Search for user profiles by their first and/or last name.</h4>
-      <br />
-      <Form.Control
-        type="text"
-        placeholder="Search"
-        onChange={(e) => debounced(e.target.value)}
-      />
+      <h4>See how your friends are doing on Wordify lately.</h4>
+      <h5>
+        Add new friends by visiting the &quot;Search for Friends&quot; page.
+      </h5>
       <br />
       <Row xs={1} md={2} lg={3} xl={4}>
-        {queriedProfiles.map((profile: IUser) => {
+        {friends.map((profile: IUser) => {
           let averageTime = 0;
           for (const time of profile.pastTimes) {
             if (time) {
@@ -79,29 +74,6 @@ export default function Search() {
             <>No attempt yet today</>
           );
 
-          const isSelf = profile._id === user._id;
-          const isFriend = (user.friends as string[]).includes(profile._id);
-
-          const FriendButton = isFriend ? (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => {
-                setFriend(profile._id, false);
-              }}
-            >
-              Unfriend
-            </Button>
-          ) : (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setFriend(profile._id, true)}
-            >
-              Add Friend
-            </Button>
-          );
-
           return (
             <Col key={profile._id}>
               <Card>
@@ -120,7 +92,6 @@ export default function Search() {
                     <br />
                     {TodaysAttempt}
                   </Card.Text>
-                  {!isSelf && FriendButton}
                 </Card.Body>
               </Card>
             </Col>

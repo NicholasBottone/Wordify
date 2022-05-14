@@ -33,6 +33,14 @@ export default function About() {
         can see a more detailed analysis of your game play statistics. We hope
         you enjoy!
       </p>
+      <br />
+      <p className="fs-5">
+        For more information about the project, please visit our{" "}
+        <a href="https://github.com/NicholasBottone/Wordify">
+          GitHub repository
+        </a>
+        .
+      </p>
     </Container>
   );
 }

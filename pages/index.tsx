@@ -18,35 +18,45 @@ const Home: NextPage = () => {
       <br />
       <br />
       {user ? (
-        <Link href="/game">
-          <Button variant="light" size="lg" className="homescreen-button">
-            Play!
-          </Button>
-        </Link>
+        <>
+          <Link href="/game">
+            <Button variant="light" size="lg" className="homescreen-button">
+              Play
+            </Button>
+          </Link>
+          <br />
+          <br />
+          <Link href="/friends">
+            <Button variant="light" size="lg" className="homescreen-button">
+              Friends
+            </Button>
+          </Link>
+          <br />
+          <br />
+          <Link href="/profile">
+            <Button variant="light" size="lg" className="homescreen-button">
+              Profile
+            </Button>
+          </Link>
+        </>
       ) : (
-        <Link href="/game">
-          <Button variant="light" size="lg" className="homescreen-button">
-            Play as Guest
+        <>
+          <Link href="/game">
+            <Button variant="light" size="lg" className="homescreen-button">
+              Play as Guest
+            </Button>
+          </Link>
+          <br />
+          <br />
+          <Button
+            variant="light"
+            size="lg"
+            onClick={login}
+            className="homescreen-button"
+          >
+            Log In
           </Button>
-        </Link>
-      )}
-      <br />
-      <br />
-      {user ? (
-        <Link href="/profile">
-          <Button variant="light" size="lg" className="homescreen-button">
-            Profile
-          </Button>
-        </Link>
-      ) : (
-        <Button
-          variant="light"
-          size="lg"
-          onClick={login}
-          className="homescreen-button"
-        >
-          Log In
-        </Button>
+        </>
       )}
     </Container>
   );

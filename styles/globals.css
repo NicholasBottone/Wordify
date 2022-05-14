@@ -9,7 +9,7 @@ table {
 }
 
 body {
-  background: #efe6ee;
+  background-color: #bfb2c4;
 }
 
 .logo {
@@ -33,8 +33,8 @@ th {
 .Game {
   text-align: center;
   background-color: #bfb2c4;
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
 }
 
 body {

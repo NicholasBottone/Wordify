@@ -33,14 +33,19 @@ const Home: NextPage = () => {
       )}
       <br />
       <br />
-      { user ? (
+      {user ? (
         <Link href="/profile">
           <Button variant="light" size="lg" className="homescreen-button">
             Profile
           </Button>
         </Link>
       ) : (
-        <Button variant="light" size="lg" onClick={login} className="homescreen-button">
+        <Button
+          variant="light"
+          size="lg"
+          onClick={login}
+          className="homescreen-button"
+        >
           Log In
         </Button>
       )}

@@ -41,9 +41,9 @@ export default function Header() {
                   Today&apos;s Stats
                 </Nav.Link>
               </Link>
-              <Link href="/search">
-                <Nav.Link as="a" href="/search">
-                  Search for Friends
+              <Link href="/friends">
+                <Nav.Link as="a" href="/friends">
+                  Friends
                 </Nav.Link>
               </Link>
               <Link href="/about">

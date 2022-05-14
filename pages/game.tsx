@@ -112,7 +112,7 @@ function Game() {
     }
 
     // check if the entry is correct. if so, end the game
-    if (correctWord!.toLowerCase() === entry) {
+    if (correctWord.toLowerCase() === entry) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }

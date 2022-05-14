@@ -158,7 +158,6 @@ function Game() {
       // they have not played
       // stop the timer and store the seconds
       continueTimer = false;
-      console.log("Final time: ", timer);
       const letterStates = board
         .map((row) =>
           row.map((letter, letterIndex) => {

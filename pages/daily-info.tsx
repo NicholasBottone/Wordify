@@ -133,7 +133,7 @@ export default function Summary() {
             <br />
             <h2>
               Looks like you have not completed today&apos;s puzzle yet.
-              Complete to access this page!
+              Complete the puzzle to access today&apos;s summary.
             </h2>
           </Container>
         );
@@ -141,9 +141,6 @@ export default function Summary() {
     } else {
       return (
         <Container className="text-centered">
-          <br />
-          <br />
-          <br />
           <h2>
             Looks like you have not completed today&apos;s puzzle yet. Complete
             to access this page!

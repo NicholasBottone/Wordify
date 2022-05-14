@@ -51,7 +51,7 @@ function Game() {
     ["", "", "", "", ""],
   ];
   const [board, setBoard] = useState(boardDefault);
-  const [correctWord, setCorrectWord] = useState<string>();
+  const [correctWord, setCorrectWord] = useState<string>("");
   const [currAttempt, setCurrAttempt] = useState({
     rowIndex: 0,
     letterIndex: 0,

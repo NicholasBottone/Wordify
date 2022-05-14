@@ -95,7 +95,7 @@ handler.post(async (req, res) => {
 
   // Update the user's profile with the result
   await User.updateOne(
-    { _id: user.id },
+    { _id: user._id },
     {
       // Set the user's pastGuesses at index 0 to the resultBoard
       "pastGuesses.0": resultBoard,

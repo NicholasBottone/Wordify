@@ -37,9 +37,9 @@ handler.post(async (req, res) => {
 
   // Update the user's friend list
   if (friend) {
-    User.updateOne({ _id: user.id }, { $push: { friends: id } });
+    User.updateOne({ _id: user._id }, { $push: { friends: id } });
   } else {
-    User.updateOne({ _id: user.id }, { $pull: { friends: id } });
+    User.updateOne({ _id: user._id }, { $pull: { friends: id } });
   }
 
   res.status(200).send("Success");
@@ -53,7 +53,7 @@ handler.get(async (req, res) => {
   const user = req.user as IUser;
 
   // Get the user's friends (populated but excluding email)
-  const userRes = await User.findById(user.id)
+  const userRes = await User.findById(user._id)
     .populate("friends")
     .select("friends");
   if (!userRes) {

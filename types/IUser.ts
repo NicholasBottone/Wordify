@@ -1,5 +1,5 @@
 export default interface IUser {
-  id: string;
+  _id: string;
   googleId: string;
   name: string;
   givenName: string;

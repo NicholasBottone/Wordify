@@ -1,5 +1,5 @@
 export default interface IPuzzle {
-  id: string;
+  _id: string;
   word: string;
   attempts: number;
   wins: number;

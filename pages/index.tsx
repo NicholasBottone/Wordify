@@ -2,8 +2,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { Button, Container, Image } from "react-bootstrap";
 import React from "react";
-import { login } from "../lib/hooks/auth";
-import { useUser } from "../lib/hooks/auth";
+import { login, useUser } from "../lib/hooks/auth";
 
 const Home: NextPage = () => {
   const { user } = useUser();
@@ -33,14 +32,19 @@ const Home: NextPage = () => {
       )}
       <br />
       <br />
-      { user ? (
+      {user ? (
         <Link href="/profile">
           <Button variant="light" size="lg" className="homescreen-button">
             Profile
           </Button>
         </Link>
       ) : (
-        <Button variant="light" size="lg" onClick={login} className="homescreen-button">
+        <Button
+          variant="light"
+          size="lg"
+          onClick={login}
+          className="homescreen-button"
+        >
           Log In
         </Button>
       )}

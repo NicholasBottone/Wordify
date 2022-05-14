@@ -1,11 +1,10 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 
 export default function About() {
   return (
-    <div>
-      <h1 className="text-centered">
-        Welcome to Wordify! This is the about page.
-      </h1>
+    <Container className="py-5">
+      <h1 className="text-center">Welcome to Wordify!</h1>
       <br />
       <p>
         Hi! We are Nick, Robert, James, Christine, Andrew, and Toshi! We are
@@ -23,6 +22,6 @@ export default function About() {
         can see a more detailed analysis of your game play statistics. We hope
         you enjoy!
       </p>
-    </div>
+    </Container>
   );
 }

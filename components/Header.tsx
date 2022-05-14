@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="light" variant="light">
         <Container>
           <Link href="/">
             <Navbar.Brand as="a" href="/">
@@ -18,7 +18,7 @@ export default function Header() {
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
-              />
+              />{" "}
               Wordify
             </Navbar.Brand>
           </Link>

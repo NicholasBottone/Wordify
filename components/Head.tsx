@@ -14,7 +14,7 @@ export default function Head({
     <NextHead>
       <title>{title}</title>
       <meta name="description" content={description} />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/icon.png" />
       <meta name="theme-color" content="#d5ebff" />
     </NextHead>
   );

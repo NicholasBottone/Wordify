@@ -9,7 +9,7 @@ table {
 }
 
 body {
-  background: #bfb2c4;
+  background-color: #bfb2c4;
 }
 
 .logo {
@@ -35,8 +35,6 @@ th {
   background-color: #bfb2c4;
   width: 100%;
   height: 100%;
-  /* display: flex; */
-  color: white;
 }
 
 body {

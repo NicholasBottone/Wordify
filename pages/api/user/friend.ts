@@ -37,9 +37,9 @@ handler.post(async (req, res) => {
 
   // Update the user's friend list
   if (friend) {
-    User.updateOne({ _id: user._id }, { $push: { friends: id } });
+    await User.updateOne({ _id: user._id }, { $push: { friends: id } });
   } else {
-    User.updateOne({ _id: user._id }, { $pull: { friends: id } });
+    await User.updateOne({ _id: user._id }, { $pull: { friends: id } });
   }
 
   res.status(200).send("Success");

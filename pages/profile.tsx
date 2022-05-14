@@ -19,18 +19,16 @@ export default function Profile() {
         {todaysGuess.map((row: any, idx: number) => {
           return (
             <div key={idx}>
-              <h1>
-                {" "}
-                {row.map((cell: any) => {
-                  if (cell == 2) {
-                    return "🟩";
-                  } else if (cell == 1) {
-                    return "🟨";
-                  } else {
-                    return "⬛️";
-                  }
-                })}
-              </h1>
+              {" "}
+              {row.map((cell: any) => {
+                if (cell == 2) {
+                  return "🟩";
+                } else if (cell == 1) {
+                  return "🟨";
+                } else {
+                  return "⬛️";
+                }
+              })}
             </div>
           );
         })}
@@ -57,9 +55,7 @@ export default function Profile() {
             />
             <br />
             <br />
-            <h4>
-              {user?.givenName} {user?.familyName}
-            </h4>
+            <h4>{user?.name}</h4>
             {user?.bio}
           </div>
           <div className="col-sm-6">

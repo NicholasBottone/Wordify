@@ -39,7 +39,6 @@ export default function Summary() {
     if (user) {
       pastGuess = user.user?.pastGuesses[0];
       if (pastGuess) {
-        console.log(puzzle);
         word = puzzle?.word;
         one = puzzle?.guessDistribution[0];
         two = puzzle?.guessDistribution[1];
@@ -75,54 +74,54 @@ export default function Summary() {
             </table>
             <Container className="mt-5 text-center d-grid gap-2">
               <h1> Guess Distribution </h1>
-              <p>
-                <h6 className="progress-label">1</h6>
+              <div>
+                <span className="fs-6 progress-label">1</span>
                 <ProgressBar
                   now={one == 0 ? 0 : 100 / (max / one)}
                   label={one}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">2</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">2</span>
                 <ProgressBar
                   now={two == 0 ? 0 : 100 / (max / two)}
                   label={two}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">3</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">3</span>
                 <ProgressBar
                   now={three == 0 ? 0 : 100 / (max / three)}
                   label={three}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">4</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">4</span>
                 <ProgressBar
                   now={four == 0 ? 0 : 100 / (max / four)}
                   label={four}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">5</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">5</span>
                 <ProgressBar
                   now={five == 0 ? 0 : 100 / (max / five)}
                   label={five}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">6</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">6</span>
                 <ProgressBar
                   now={six == 0 ? 0 : 100 / (max / six)}
                   label={six}
                   variant="success"
                 />
-              </p>
+              </div>
             </Container>
           </Container>
         );
@@ -134,7 +133,7 @@ export default function Summary() {
             <br />
             <h2>
               Looks like you have not completed today&apos;s puzzle yet.
-              Complete to access this page!
+              Complete the puzzle to access today&apos;s summary.
             </h2>
           </Container>
         );
@@ -142,9 +141,6 @@ export default function Summary() {
     } else {
       return (
         <Container className="text-centered">
-          <br />
-          <br />
-          <br />
           <h2>
             Looks like you have not completed today&apos;s puzzle yet. Complete
             to access this page!

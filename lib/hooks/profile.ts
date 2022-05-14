@@ -30,7 +30,7 @@ export async function setFriend(id: string, friend: boolean) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id, friend }),
   });
-  mutate("/api/user");
+  mutate("/api/auth");
 }
 
 /**

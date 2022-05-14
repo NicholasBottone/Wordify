@@ -5,7 +5,7 @@ import IUser from "../../types/IUser";
 
 // Get the user ID from user object
 passport.serializeUser((user, done) => {
-  done(null, (user as IUser).id);
+  done(null, (user as IUser)._id);
 });
 
 // Get the user object from the user ID

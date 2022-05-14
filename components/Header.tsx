@@ -2,13 +2,14 @@ import React from "react";
 import Link from "next/link";
 import { Navbar, Container, Nav, Image, NavDropdown } from "react-bootstrap";
 import { login, logout, useUser } from "../lib/hooks/auth";
+import { FaGithub } from "react-icons/fa";
 
 export default function Header() {
   const { user } = useUser();
 
   return (
     <header>
-      <Navbar bg="light" variant="light">
+      <Navbar bg="light" variant="light" expand="lg">
         <Container>
           <Link href="/">
             <Navbar.Brand as="a" href="/">
@@ -22,8 +23,8 @@ export default function Header() {
               Wordify
             </Navbar.Brand>
           </Link>
-          <Navbar.Toggle />
-          <Navbar.Collapse>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Link href="/">
                 <Nav.Link as="a" href="/">
@@ -37,7 +38,12 @@ export default function Header() {
               </Link>
               <Link href="/daily-info">
                 <Nav.Link as="a" href="/daily-info">
-                  Stats
+                  Today&apos;s Stats
+                </Nav.Link>
+              </Link>
+              <Link href="/friends">
+                <Nav.Link as="a" href="/friends">
+                  Friends
                 </Nav.Link>
               </Link>
               <Link href="/about">
@@ -50,6 +56,9 @@ export default function Header() {
                   Privacy Policy
                 </Nav.Link>
               </Link>
+              <Nav.Link href="https://github.com/NicholasBottone/Wordify">
+                <FaGithub />
+              </Nav.Link>
             </Nav>
             <Nav className="justify-content-end">
               {user ? (
@@ -72,6 +81,12 @@ export default function Header() {
                       Profile
                     </NavDropdown.Item>
                   </Link>
+                  <Link href="/friends">
+                    <NavDropdown.Item as="a" href="/friends">
+                      Friends
+                    </NavDropdown.Item>
+                  </Link>
+                  <NavDropdown.Divider />
                   <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                 </NavDropdown>
               ) : (

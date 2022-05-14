@@ -50,8 +50,6 @@ export default function Profile() {
       }
       averageTime =
         averageTime == undefined ? 0 : Math.round(averageTime / times.length);
-    } else {
-      averageTime = 0;
     }
 
     return (
@@ -72,9 +70,7 @@ export default function Profile() {
             />
             <br />
             <br />
-            <h4>
-              {user?.givenName} {user?.familyName}
-            </h4>
+            <h4>{user?.name}</h4>
             {user?.bio}
           </div>
           <div className="col-sm-6">
@@ -118,24 +114,24 @@ export default function Profile() {
             </Container>
             <Container className="mt-5 d-grid gap-2">
               <h1> Guess Distribution </h1>
-              <p>
-                <h6 className="progress-label">1</h6>
+              <div>
+                <span className="fs-6 progress-label">1</span>
                 <ProgressBar
                   now={oneGuess == 0 ? 0 : 100 / (maxGuesses / oneGuess)}
                   label={oneGuess}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">2</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">2</span>
                 <ProgressBar
                   now={twoGuesses == 0 ? 0 : 100 / (maxGuesses / twoGuesses)}
                   label={twoGuesses}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">3</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">3</span>
                 <ProgressBar
                   now={
                     threeGuesses == 0 ? 0 : 100 / (maxGuesses / threeGuesses)
@@ -143,31 +139,31 @@ export default function Profile() {
                   label={threeGuesses}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">4</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">4</span>
                 <ProgressBar
                   now={fourGuesses == 0 ? 0 : 100 / (maxGuesses / fourGuesses)}
                   label={fourGuesses}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">5</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">5</span>
                 <ProgressBar
                   now={fiveGuesses == 0 ? 0 : 100 / (maxGuesses / fiveGuesses)}
                   label={fiveGuesses}
                   variant="success"
                 />
-              </p>
-              <p>
-                <h6 className="progress-label">6</h6>
+              </div>
+              <div>
+                <span className="fs-6 progress-label">6</span>
                 <ProgressBar
                   now={sixGuesses == 0 ? 0 : 100 / (maxGuesses / sixGuesses)}
                   label={sixGuesses}
                   variant="success"
                 />
-              </p>
+              </div>
             </Container>
           </div>
         </div>
@@ -180,8 +176,7 @@ export default function Profile() {
       <h4> Log in to access the statistics page!</h4>
       <br />
       <Button variant="light" size="lg" onClick={login}>
-        {" "}
-        Log In{" "}
+        Log In
       </Button>
     </Container>
   );

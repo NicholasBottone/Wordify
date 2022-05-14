@@ -51,7 +51,7 @@ function Game() {
     ["", "", "", "", ""],
   ];
   const [board, setBoard] = useState(boardDefault);
-  const [correctWord, setCorrectWord] = useState<string>();
+  const [correctWord, setCorrectWord] = useState<string>("");
   const [currAttempt, setCurrAttempt] = useState({
     rowIndex: 0,
     letterIndex: 0,
@@ -112,7 +112,7 @@ function Game() {
     }
 
     // check if the entry is correct. if so, end the game
-    if (correctWord!.toLowerCase() === entry) {
+    if (correctWord.toLowerCase() === entry) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
@@ -158,7 +158,6 @@ function Game() {
       // they have not played
       // stop the timer and store the seconds
       continueTimer = false;
-      console.log("Final time: ", timer);
       const letterStates = board
         .map((row) =>
           row.map((letter, letterIndex) => {

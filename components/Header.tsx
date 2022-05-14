@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="light" variant="light">
         <Container>
           <Link href="/">
             <Navbar.Brand as="a" href="/">

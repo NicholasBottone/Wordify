@@ -264,10 +264,10 @@ function Game() {
     return (
       <Container className="mt-5 d-grid gap-2 text-center">
         <Row>
-          <h1>You have already played today!</h1>
+          <h1>You have already played today</h1>
         </Row>
         <Row>
-          <h2> Your Daily Wordify Board </h2>
+          <h2> Your Wordify board for today </h2>
           {resultBoard}
         </Row>
       </Container>

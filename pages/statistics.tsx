@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, Container, ProgressBar, Image } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  ProgressBar,
+  Image,
+  Row,
+  Col,
+} from "react-bootstrap";
 import Link from "next/link";
 import { useUser, login } from "../lib/hooks/auth";
 
@@ -74,7 +81,7 @@ export default function Profile() {
             {user?.bio}
           </div>
           <div className="col-sm-6">
-            <Container className="mt-5">
+            <Container className="mt-5 text-center">
               <Link href="/profile">
                 <Button variant="light" size="sm" className="">
                   Dashboard
@@ -86,31 +93,41 @@ export default function Profile() {
                 </Button>
               </Link>
             </Container>
-            <Container className="mt-5 d-grid gap-2">
-              <h1>Statistics </h1>
-              <table className="Statistics">
-                <thead>
-                  <tr id="statisticRow">
-                    <th scope="col"> {gamesPlayed}</th>
-                    <th scope="col">
-                      {" "}
-                      {winPercentage} {`%`}{" "}
-                    </th>
-                    <th scope="col"> {winStreak} </th>
-                    <th scope="col"> {maxStreak} </th>
-                    <th scope="col"> {averageTime} Sec. </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr id="statisticRow">
-                    <td scope="row">Played</td>
-                    <td>Win %</td>
-                    <td>Current Streak</td>
-                    <td>Maximum Streak</td>
-                    <td>Average Time</td>
-                  </tr>
-                </tbody>
-              </table>
+            <Container className="mt-5 d-grid gap-2 text-center">
+              <h1>Your Statistics</h1>
+              <Row
+                style={{
+                  color: "#02c39a",
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                }}
+              >
+                <Col>{gamesPlayed}</Col>
+                <Col>
+                  {winPercentage}
+                  {`%`}
+                </Col>
+                <Col>{averageTime} sec</Col>
+              </Row>
+              <Row>
+                <Col>Played</Col>
+                <Col>Win %</Col>
+                <Col>Average Time</Col>
+              </Row>
+              <Row
+                style={{
+                  color: "#02c39a",
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                }}
+              >
+                <Col>{winStreak}</Col>
+                <Col>{maxStreak}</Col>
+              </Row>
+              <Row>
+                <Col>Current Streak</Col>
+                <Col>Maximum Streak</Col>
+              </Row>
             </Container>
             <Container className="mt-5 d-grid gap-2">
               <h1> Guess Distribution </h1>

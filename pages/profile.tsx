@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Container, Image } from "react-bootstrap";
+import { Button, Container, Row, Col, Image } from "react-bootstrap";
 import Link from "next/link";
 import { useUser, login } from "../lib/hooks/auth";
 
 export default function Profile() {
   const { user } = useUser();
-  let todaysGuess: any = 0;
+  let todaysGuess: number[][] | null = null;
   let board: any;
   if (user) {
     todaysGuess = user?.pastGuesses[0];
@@ -15,25 +15,26 @@ export default function Profile() {
   } else {
     // map used rows to appropriate squares
     board = (
-      <div>
+      <Container>
         {todaysGuess.map((row: any, idx: number) => {
           return (
-            <div key={idx}>
-              {" "}
-              {row.map((cell: any) => {
-                if (cell == 2) {
-                  return "🟩";
-                } else if (cell == 1) {
-                  return "🟨";
-                } else {
-                  return "⬛️";
-                }
-              })}
-            </div>
+            <Row className="justify-content-md-center" key={idx}>
+              <Col className="boardResult">
+                {" "}
+                {row.map((cell: any) => {
+                  if (cell == 2) {
+                    return "🟩";
+                  } else if (cell == 1) {
+                    return "🟨";
+                  } else {
+                    return "⬛️";
+                  }
+                })}
+              </Col>
+            </Row>
           );
         })}
-        {/* fill with gray squares for unused rows */}
-      </div>
+      </Container>
     );
   }
 
@@ -59,7 +60,7 @@ export default function Profile() {
             {user?.bio}
           </div>
           <div className="col-sm-6">
-            <Container className="mt-5">
+            <Container className="mt-5 text-center">
               <Link href="/profile">
                 <Button variant="secondary" size="sm" className="">
                   Dashboard
@@ -71,12 +72,11 @@ export default function Profile() {
                 </Button>
               </Link>
             </Container>
-            <Container className="mt-5 d-grid gap-2">
-              <div className="col-sm-6 text-center">
+            <Container className="mt-5 d-grid gap-2 text-center">
+              <Row>
                 <h2> Today&apos;s Board </h2>
-                <h1 className="text-centered"></h1>
                 {board}
-              </div>
+              </Row>
             </Container>
           </div>
         </div>

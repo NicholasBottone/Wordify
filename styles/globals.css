@@ -187,3 +187,8 @@ body {
 #defaultKey {
   background-color: #d2d6d9;
 }
+
+.boardResult {
+  font-size: 30px;
+  letter-spacing: 3px;
+}

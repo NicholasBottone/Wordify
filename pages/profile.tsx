@@ -74,8 +74,14 @@ export default function Profile() {
             </Container>
             <Container className="mt-5 d-grid gap-2 text-center">
               <Row>
-                <h2> Today&apos;s Board </h2>
+                <h2>Today&apos;s Board</h2>
                 {board}
+                <br />
+                {user.pastTimes[0] && (
+                  <Row>
+                    <h3>Finished in {user.pastTimes[0]} seconds</h3>
+                  </Row>
+                )}
               </Row>
             </Container>
           </div>

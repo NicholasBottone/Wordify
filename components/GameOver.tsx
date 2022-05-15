@@ -25,7 +25,14 @@ export default function GameOver() {
             Get a new word!
           </Button>
         ) : (
-          <></>
+          <>
+            <Button variant="light" onClick={() => router.push("/daily-info")}>
+              See how others did!
+            </Button>{" "}
+            <Button variant="light" onClick={() => router.push("/friends")}>
+              See how your friends did!
+            </Button>
+          </>
         )}
       </div>
     </div>

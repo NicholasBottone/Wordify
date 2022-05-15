@@ -225,16 +225,14 @@ function Game() {
 
   // error check the loading of puzzle
   if (user && puzzleError) {
-    return <div>You cannot play today&apos;s puzzle without logging in!</div>;
+    return <div>There was an error loading the puzzle.</div>;
   } else if (puzzleIsLoading) {
     return <div>Puzzle is loading! Hang in there!</div>;
   }
 
   // error check the loading of user
-  if (user && userError) {
-    return <div>Error with user...</div>;
-  } else if (userIsLoading) {
-    return <div>User data is loading! Hang in there!</div>;
+  if (userIsLoading) {
+    return <div>Loading... Hang in there!</div>;
   }
 
   // check if user has already played the game today. show their result board if they have
@@ -264,12 +262,17 @@ function Game() {
     return (
       <Container className="mt-5 d-grid gap-2 text-center">
         <Row>
-          <h1>You have already played today</h1>
+          <h1>You have already played today&apos;s Wordify puzzle!</h1>
         </Row>
         <Row>
           <h2> Your Wordify board for today </h2>
           {resultBoard}
         </Row>
+        {user.pastTimes[0] && (
+          <Row>
+            <h3>Finished in {user.pastTimes[0]} seconds</h3>
+          </Row>
+        )}
       </Container>
     );
   }

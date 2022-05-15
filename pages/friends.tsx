@@ -73,8 +73,12 @@ export default function Friends() {
 
           const TodaysAttempt = profile.pastGuesses[0] ? (
             <>
-              Today&apos;s Attempt: {profile.pastTimes[0]} seconds
-              <br />
+              {profile.pastTimes[0] && (
+                <>
+                  Today&apos;s Attempt: {profile.pastTimes[0]} seconds
+                  <br />
+                </>
+              )}
               {profile.pastGuesses[0].map((row: any, idx) => {
                 return (
                   <span key={idx}>

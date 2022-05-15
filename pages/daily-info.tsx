@@ -1,6 +1,6 @@
 import { useDailyPuzzle } from "../lib/hooks/puzzle";
 import React from "react";
-import { Container, ProgressBar } from "react-bootstrap";
+import { Col, Container, ProgressBar, Row } from "react-bootstrap";
 import { useUser } from "../lib/hooks/auth";
 
 export default function Summary() {
@@ -56,24 +56,24 @@ export default function Summary() {
             <h1>Today&apos;s answer was {word}!</h1>
             <br />
             <h2>All User Summary</h2>
-            <table className="Statistics">
-              <thead>
-                <tr>
-                  <th scope="col">{attempts}</th>
-                  <th scope="col">{wins}</th>
-                  <th scope="col">{avgTime} Sec.</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td scope="row">Total Attempts</td>
-                  <td>Total Wins</td>
-                  <td>Average Time</td>
-                </tr>
-              </tbody>
-            </table>
+            <Row
+              style={{
+                color: "#02c39a",
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+              }}
+            >
+              <Col>{attempts}</Col>
+              <Col>{wins}</Col>
+              <Col>{avgTime} sec</Col>
+            </Row>
+            <Row>
+              <Col>Total Attempts</Col>
+              <Col>Total Wins</Col>
+              <Col>Average Time</Col>
+            </Row>
             <Container className="mt-5 text-center d-grid gap-2">
-              <h1> Guess Distribution </h1>
+              <h2>Guess Distribution</h2>
               <div>
                 <span className="fs-6 progress-label">1</span>
                 <ProgressBar

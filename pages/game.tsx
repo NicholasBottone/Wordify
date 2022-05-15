@@ -12,6 +12,7 @@ import { useDailyPuzzle, submitDailyPuzzleResult } from "../lib/hooks/puzzle";
 import { useUser } from "../lib/hooks/auth";
 import WordVerifier from "../lib/words/wordVerifier";
 import { words } from "../lib/words/words";
+import { Container, Row, Col } from "react-bootstrap";
 
 interface IContext {
   board: string[][];
@@ -68,12 +69,12 @@ function Game() {
   let [timer, setTimer] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      if (continueTimer) {
+      if (!gameOver.gameOver) {
         setTimer((timer += 1));
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [gameOver.gameOver]);
 
   // backend calls
   const { user, error: userError, isLoading: userIsLoading } = useUser();
@@ -224,28 +225,24 @@ function Game() {
 
   // error check the loading of puzzle
   if (user && puzzleError) {
-    return <div>You cannot play today&apos;s puzzle without logging in!</div>;
+    return <div>There was an error loading the puzzle.</div>;
   } else if (puzzleIsLoading) {
     return <div>Puzzle is loading! Hang in there!</div>;
   }
 
   // error check the loading of user
-  if (user && userError) {
-    return <div>Error with user...</div>;
-  } else if (userIsLoading) {
-    return <div>User data is loading! Hang in there!</div>;
+  if (userIsLoading) {
+    return <div>Loading... Hang in there!</div>;
   }
 
-  // TODO: redirect to statistics page once merged.
-  // check if user has already played the game today
+  // check if user has already played the game today. show their result board if they have
   if (user?.pastGuesses[0]) {
     const resultBoard = (
-      <div>
+      <Container>
         {user.pastGuesses[0].map((row: any, idx: number) => {
           return (
-            <div key={idx}>
-              <h1>
-                {" "}
+            <Row className="justify-content-md-center" key={idx}>
+              <Col className="boardResult">
                 {row.map((cell: any) => {
                   if (cell == 2) {
                     return "🟩";
@@ -255,21 +252,28 @@ function Game() {
                     return "⬛️";
                   }
                 })}
-              </h1>
-            </div>
+              </Col>
+            </Row>
           );
         })}
-        {/* fill with gray squares for unused rows */}
-      </div>
+      </Container>
     );
 
     return (
-      <div>
-        <div className="text-centered">
-          You have already played today!
-          <div> Your daily Wordify board!{resultBoard}</div>
-        </div>
-      </div>
+      <Container className="mt-5 d-grid gap-2 text-center">
+        <Row>
+          <h1>You have already played today&apos;s Wordify puzzle!</h1>
+        </Row>
+        <Row>
+          <h2> Your Wordify board for today </h2>
+          {resultBoard}
+        </Row>
+        {user.pastTimes[0] && (
+          <Row>
+            <h3>Finished in {user.pastTimes[0]} seconds</h3>
+          </Row>
+        )}
+      </Container>
     );
   }
 

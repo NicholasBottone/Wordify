@@ -34,7 +34,6 @@ const config: PlaywrightTestConfig = {
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "http://localhost:3000",
-
     /* Save trace for all tests. See https://playwright.dev/docs/trace-viewer */
     trace: "on",
   },

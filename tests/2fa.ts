@@ -24,7 +24,7 @@ export async function login(page: Page) {
   // Fill [aria-label="Email or phone"]
   await page
     .locator('[aria-label="Email or phone"]')
-    .fill("mymocktesterwowie@gmail.com");
+    .fill(process.env.TEST_USERNAME!);
 
   // Press Enter
   await Promise.all([
@@ -35,7 +35,7 @@ export async function login(page: Page) {
   // Fill [aria-label="Enter your password"]
   await page
     .locator('[aria-label="Enter your password"]')
-    .fill("37}`Z^G]Zab26_#b");
+    .fill(process.env.TEST_PASSWORD!);
 
   // Press Enter
   await Promise.all([

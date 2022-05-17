@@ -18,20 +18,22 @@ export default function About() {
       </h4>
       <br />
       <p className="fs-5">
-        Hi! We are Nick, Robert, James, Christine, Andrew, and Toshi! We are
-        students at Brown University who made this project as our final for
-        CSCI0320: Introduction to Software Engineering. We are a group who loves
-        word games and wanted to make something that us and our fellow word game
-        lovers could enjoy.
+        Hi! We are Nick, Robert, James, Christine, Andrew, and Toshi -- a couple
+        of students at Brown University who made this application as our final
+        project for CSCI0320: Introduction to Software Engineering. We are a
+        group who loves word games and wanted to make something that we and our
+        fellow word game lovers could enjoy.
       </p>
       <br />
       <p className="fs-5">
-        This is a spinoff of one of the word games that have been trending
-        lately. However, we wanted our users to be more connected. Thus, we also
-        included a feature where you can see the results of all people who
-        played the puzzle for the day! We also added a profile page where you
-        can see a more detailed analysis of your game play statistics. We hope
-        you enjoy!
+        Wordify is a spinoff of one of the word games that have been trending
+        lately. However, we noticed that there was a lack of community
+        engagement so we set out to make our users feel more connected. Thus, we
+        included a feature where you can see the global results of all people
+        who played the puzzle for the day, a profile page where you can see a
+        detailed analysis of your personal statistics, and a friends feature
+        where you can search for and add users to see how well they have been
+        doing on Wordify. Hope you enjoy!
       </p>
       <br />
       <p className="fs-5">

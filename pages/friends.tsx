@@ -24,7 +24,7 @@ export default function Friends() {
   if (!user) {
     return (
       <Container className="text-center mt-5">
-        <h1>You must be logged in to view this page</h1>
+        <h1>You must be logged in to view the friends page</h1>
       </Container>
     );
   }

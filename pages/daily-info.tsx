@@ -20,9 +20,11 @@ export default function Summary() {
   let pastGuess;
   if (error) {
     return (
-      <h1 className="text-centered">
-        You must be logged in to view the daily puzzle summary.
-      </h1>
+      <Container className="py-5">
+        <h1 className="text-center">
+          You must be logged in to view the daily puzzle summary
+        </h1>
+      </Container>
     );
   }
 

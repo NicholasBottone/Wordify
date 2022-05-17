@@ -42,7 +42,7 @@ export default function Header() {
                 </Nav.Link>
               </Link>
               <Link href="/instructions">
-                <Nav.Link as="a" href="/friends">
+                <Nav.Link as="a" href="/instructions">
                   How to Play
                 </Nav.Link>
               </Link>

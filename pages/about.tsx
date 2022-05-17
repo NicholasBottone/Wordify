@@ -18,11 +18,10 @@ export default function About() {
       </h4>
       <br />
       <p className="fs-5">
-        Hi! We are Nick, Robert, James, Christine, Andrew, and Toshi -- a couple
-        of students at Brown University who made this application as our final
-        project for CSCI0320: Introduction to Software Engineering. We are a
-        group who loves word games and wanted to make something that we and our
-        fellow word game lovers could enjoy.
+        Hi! We are students at Brown University that made this application as
+        our final project for CSCI0320: Introduction to Software Engineering. We
+        are a group that loves word games and wanted to make something that we
+        and our fellow word game lovers could enjoy.
       </p>
       <br />
       <p className="fs-5">

@@ -26,11 +26,6 @@ export default function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link href="/">
-                <Nav.Link as="a" href="/">
-                  Home
-                </Nav.Link>
-              </Link>
               <Link href="/game">
                 <Nav.Link as="a" href="/game">
                   Play
@@ -44,6 +39,11 @@ export default function Header() {
               <Link href="/friends">
                 <Nav.Link as="a" href="/friends">
                   Friends
+                </Nav.Link>
+              </Link>
+              <Link href="/instructions">
+                <Nav.Link as="a" href="/friends">
+                  How to Play
                 </Nav.Link>
               </Link>
               <Link href="/about">
